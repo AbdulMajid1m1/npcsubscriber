@@ -690,6 +690,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                         <ul className="text-sm flex flex-col gap-3">
                           <li>
                             <Link
+                              to={'/member/products'}
                               className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
                             >
                               <div className="flex justify-center items-center gap-3 flex-row">
