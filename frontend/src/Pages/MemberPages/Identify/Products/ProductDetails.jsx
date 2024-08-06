@@ -49,7 +49,7 @@ const ProductDetails = () => {
 
       <div className="flex justify-center items-center">
         <div
-          className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl -mt-10 px-10 py-8`}
+          className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl -mt-10 sm:px-10 px-4 py-8`}
         >
           <form className="flex flex-col gap-4">
             {/* Product Name */}
@@ -141,7 +141,7 @@ const ProductDetails = () => {
       {/* Second Content */}
       <div className="flex justify-center items-center">
         <div
-          className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl mt-6 mb-6 px-10 py-8`}
+          className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl mt-6 mb-6 sm:px-10 px-4 py-8`}
         >
           <form className="flex flex-col gap-4">
             {/* Product Description Language */}
