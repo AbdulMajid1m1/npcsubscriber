@@ -25,6 +25,24 @@ const Products = () => {
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
       <div className="bg-white p-6 shadow-md">
+        <div className="flex items-center flex-wrap space-x-2 mb-6">
+          {/* Standard Search Button */}
+          <button className="relative flex items-center justify-center bg-purple-600 text-white py-2 px-5 shadow-lg hover:bg-purple-700 transform hover:scale-105 transition-transform focus:outline-none trapezoid-left">
+            <div
+              className="absolute left-2 flex items-center justify-center bg-orange-500 rounded-full"
+              style={{ width: "35px", height: "35px" }}
+            >
+              <i className="fas fa-search text-white"></i>
+            </div>
+            <span className="ml-10">Standard Search</span>
+          </button>
+
+          {/* AI Search Button */}
+          <button className="bg-orange-300 text-white py-2 px-5 shadow-lg hover:bg-orange-400 transform hover:scale-105 transition-transform focus:outline-none trapezoid-right">
+            <span>AI Search</span>
+          </button>
+        </div>
+
         <h2 className="text-xl font-sans font-semibold text-secondary mb-4">
           Products
         </h2>
