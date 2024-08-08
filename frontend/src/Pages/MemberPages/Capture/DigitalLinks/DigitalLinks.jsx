@@ -5,7 +5,7 @@ import { GtinColumn, InventorySuppliersDataColumn } from '../../../../utils/data
 const DigitalLinks = () => {
   const [activeTab, setActiveTab] = useState('Products Contents');
   const [data, setData] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
  
   const tabs = [
     { name: 'Products Contents', icon: 'ℹ️' },
