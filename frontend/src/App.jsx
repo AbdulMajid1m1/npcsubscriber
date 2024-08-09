@@ -17,6 +17,8 @@ import ProductDetails from "./Pages/MemberPages/Identify/Products/ProductDetails
 import SubscriberDashboard from "./Pages/MemberPages/SubscriberDashboard/SubscriberDashboard.jsx";
 import ApiGuide from "./Pages/MemberPages/ApiGuide/ApiGuide.jsx";
 import ApiHelpDesk from "./Pages/MemberPages/ApiGuide/ApiHelpDesk.jsx";
+import SubmittedRequest from "./Pages/MemberPages/Identify/SubmittedRequest/SubmittedRequest.jsx";
+import ApprovedRequest from "./Pages/MemberPages/Identify/ApprovedRequest/ApprovedRequest.jsx";
 
 const queryClient = new QueryClient();
 
@@ -95,6 +97,9 @@ const App = () => {
                         <Route path="product-details" element={<ProductDetails />} />
                          <Route path="ApiGuide" element={<ApiGuide />} />
                          <Route path="api-helpdesk" element={<ApiHelpDesk />} />
+                         <Route path="SubmittedRequest" element={<SubmittedRequest />} />
+                         <Route path="ApprovedRequest" element={<ApprovedRequest />} />
+
 
                       </Routes>
                     </MainLayout>

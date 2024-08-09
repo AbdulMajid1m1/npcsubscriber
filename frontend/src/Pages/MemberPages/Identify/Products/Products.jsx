@@ -162,8 +162,8 @@ const Products = () => {
               <p className="text-center font-normal font-sans text-secondary">
                 {request.name}
               </p>
-              <button className="flex items-center justify-center bg-primary2 font-sans text-white sm:px-10 px-2 py-1 mt-2 rounded hover:bg-orange-700 focus:outline-none">
-                Add to Cart
+              <button className="flex items-center justify-center bg-primary2 font-sans text-white sm:px-5 px-2 py-2 mt-2 rounded hover:bg-orange-700 focus:outline-none">
+                Add to Request
               </button>
             </div>
           ))}
