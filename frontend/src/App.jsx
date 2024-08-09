@@ -15,6 +15,8 @@ import NewFooter from "./components/Footer/NewFooter.jsx";
 import DigitalLinks from "./Pages/MemberPages/Capture/DigitalLinks/DigitalLinks.jsx";
 import Products from "./Pages/MemberPages/Identify/Products/Products.jsx";
 import ProductDetails from "./Pages/MemberPages/Identify/Products/ProductDetails.jsx";
+import ApiGuide from "./Pages/MemberPages/ApiGuide/ApiGuide.jsx";
+import ApiHelpDesk from "./Pages/MemberPages/ApiGuide/ApiHelpDesk.jsx";
 
 const queryClient = new QueryClient();
 
@@ -91,6 +93,8 @@ const App = () => {
                         <Route path="digital-links" element={<DigitalLinks />} />
                         <Route path="products" element={<Products />} />
                         <Route path="product-details" element={<ProductDetails />} />
+                         <Route path="ApiGuide" element={<ApiGuide />} />
+                         <Route path="api-helpdesk" element={<ApiHelpDesk />} />
 
                       </Routes>
                     </MainLayout>
