@@ -5,7 +5,7 @@ import { FaBoxOpen } from 'react-icons/fa';
 import chart1 from "../../../Images/chart1.png";
 import chart2 from "../../../Images/chart2.png";
 
-const BrandDashboard = () => {
+const SubscriberDashboard = () => {
   const { t, i18n } = useTranslation();
   useEffect(() => {
     // auto scroll to bottom
@@ -95,4 +95,4 @@ const BrandDashboard = () => {
   )
 }
 
-export default BrandDashboard
+export default SubscriberDashboard

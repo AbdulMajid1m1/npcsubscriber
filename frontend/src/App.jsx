@@ -5,7 +5,6 @@ import GTIN from "./Pages/MemberPages/GTIN/GTIN";
 import { LanguageProvider } from "./Contexts/LanguageContext.jsx";
 import MemberLogin from "./Pages/MemberPages/MemberLogin/EmailAddress/MemberLogin.jsx";
 import SelectGln from "./Pages/MemberPages/MemberLogin/EmailAddress/SelectGln.jsx";
-import BrandDashboard from "./Pages/MemberPages/BrandDashboard/BrandDashboard.jsx";
 import SideNav from "./components/Sidebar/SideNav.jsx";
 import { useTranslation } from "react-i18next";
 import { QueryClient, QueryClientProvider } from "react-query";
@@ -15,6 +14,7 @@ import NewFooter from "./components/Footer/NewFooter.jsx";
 import DigitalLinks from "./Pages/MemberPages/Capture/DigitalLinks/DigitalLinks.jsx";
 import Products from "./Pages/MemberPages/Identify/Products/Products.jsx";
 import ProductDetails from "./Pages/MemberPages/Identify/Products/ProductDetails.jsx";
+import SubscriberDashboard from "./Pages/MemberPages/SubscriberDashboard/SubscriberDashboard.jsx";
 import ApiGuide from "./Pages/MemberPages/ApiGuide/ApiGuide.jsx";
 import ApiHelpDesk from "./Pages/MemberPages/ApiGuide/ApiHelpDesk.jsx";
 
@@ -87,7 +87,7 @@ const App = () => {
                       <Routes>
                         <Route
                           path="dashboard"
-                          element={<BrandDashboard />}
+                          element={<SubscriberDashboard />}
                         />
                         <Route path="gtin" element={<GTIN />} />
                         <Route path="digital-links" element={<DigitalLinks />} />
