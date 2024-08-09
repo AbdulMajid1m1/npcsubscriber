@@ -8,8 +8,15 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 
 const Products = () => {
+  const [activeTab, setActiveTab] = useState('Standard Search');
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  
+  const tabs = [
+    { name: 'Standard Search', icon: '' },
+    { name: 'AI Search', icon: '' },
+  ];
 
   // Sample data for requests
   const requests = Array.from({ length: 20 }, (_, index) => ({
@@ -26,21 +33,33 @@ const Products = () => {
     <div className="p-4 bg-gray-100 min-h-screen">
       <div className="bg-white p-6 shadow-md">
         <div className="flex items-center flex-wrap space-x-2 mb-6">
-          {/* Standard Search Button */}
-          <button className="relative flex items-center justify-center bg-purple-600 text-white py-2 px-5 shadow-lg hover:bg-purple-700 transform hover:scale-105 transition-transform focus:outline-none trapezoid-left">
-            <div
-              className="absolute left-2 flex items-center justify-center bg-orange-500 rounded-full"
-              style={{ width: "35px", height: "35px" }}
-            >
-              <i className="fas fa-search text-white"></i>
+          {/* Standard Search Button Tabs */}
+          <div className="overflow-x-auto">
+            <div className="flex justify-start items-center">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.name}
+                  onClick={() => setActiveTab(tab.name)}
+                  className={`flex items-center justify-center text-sm py-3 px-3 font-semibold transition-all duration-200 whitespace-nowrap ${
+                    activeTab === tab.name
+                      ? 'bg-[#fdba74] text-secondary shadow-lg relative z-10'
+                      : 'bg-[#D4E1F1] text-gray-600 hover:bg-gray-300'
+                  }`}
+                  style={{
+                    clipPath: activeTab === tab.name
+                      ? 'polygon(0% 0%, 90% 0%, 95% 100%, 5% 100%, 10% 10%)'
+                      : 'polygon(10% 0%, 90% 0%, 95% 100%, 5% 100%)',
+                    width: '150px',
+                    height: activeTab === tab.name ? '50px' : '40px',
+                    marginLeft: activeTab === tab.name ? '0px' : '-15px',
+                  }}
+                >
+                  {tab.icon && <span className="mr-2">{tab.icon}</span>}
+                  {tab.name}
+                </button>
+              ))}
             </div>
-            <span className="ml-10">Standard Search</span>
-          </button>
-
-          {/* AI Search Button */}
-          <button className="bg-orange-300 text-white py-2 px-5 shadow-lg hover:bg-orange-400 transform hover:scale-105 transition-transform focus:outline-none trapezoid-right">
-            <span>AI Search</span>
-          </button>
+          </div>
         </div>
 
         <h2 className="text-xl font-sans font-semibold text-secondary mb-4">
