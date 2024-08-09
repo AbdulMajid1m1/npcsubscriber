@@ -128,7 +128,7 @@ const Products = () => {
             Search by Product Classifications
           </h2>
         </div>
-        <div className="grid 2xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-6">
+        <div className="grid 2xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
           {filteredRequests.map((request) => (
             <div
               key={request.id}
@@ -143,6 +143,9 @@ const Products = () => {
               <p className="text-center font-normal font-sans text-secondary">
                 {request.name}
               </p>
+              <button className="flex items-center justify-center bg-primary2 font-sans text-white sm:px-10 px-2 py-1 mt-2 rounded hover:bg-orange-700 focus:outline-none">
+                Add to Cart
+              </button>
             </div>
           ))}
         </div>
