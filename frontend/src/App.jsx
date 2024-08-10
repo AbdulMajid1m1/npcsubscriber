@@ -17,6 +17,7 @@ import ProductDetails from "./Pages/MemberPages/Identify/Products/ProductDetails
 import SubscriberDashboard from "./Pages/MemberPages/SubscriberDashboard/SubscriberDashboard.jsx";
 import ApiGuide from "./Pages/MemberPages/ApiGuide/ApiGuide.jsx";
 import ApiHelpDesk from "./Pages/MemberPages/ApiGuide/ApiHelpDesk.jsx";
+import NpcWorkFlowPopUp from "./Pages/MemberPages/Identify/Products/NpcWorkFlowPopUp.jsx";
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,7 @@ const App = () => {
                         <Route path="digital-links" element={<DigitalLinks />} />
                         <Route path="products" element={<Products />} />
                         <Route path="product-details" element={<ProductDetails />} />
+                        <Route path="npc-work-flow" element={<NpcWorkFlowPopUp />} />
                          <Route path="ApiGuide" element={<ApiGuide />} />
                          <Route path="api-helpdesk" element={<ApiHelpDesk />} />
 

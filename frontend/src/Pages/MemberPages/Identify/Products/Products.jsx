@@ -11,6 +11,8 @@ import { IoIosArrowDropleftCircle } from "react-icons/io";
 import infoicon from "../../../../Images/infoicon.png";
 import addtorequest from "../../../../Images/addtorequest.png";
 import { FaPlus } from 'react-icons/fa';
+import ProductDetails from "./ProductDetails";
+import NpcWorkFlowPopUp from "./NpcWorkFlowPopUp";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
@@ -35,6 +37,17 @@ const Products = () => {
       request.itemcode.toLowerCase().includes(searchTerm.toLowerCase()) ||
       request.companyname.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+
+  const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] = useState(false);
+  const handleMyProductsPopUp = () => {
+    setIsMyProductsPopUpVisible(true);
+  };
+
+  const [isWorkFlowPopUpVisible, setIsWorkFlowPopUpVisible] = useState(false);
+  const handleWorkFlowPopUp = () => {
+    setIsWorkFlowPopUpVisible(true);
+  };
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
@@ -175,7 +188,7 @@ const Products = () => {
           {filteredRequests.map((request) => (
             <div
               key={request.id}
-              onClick={() => navigate(`/member/product-details`)}
+              // onClick={() => navigate(`/member/product-details`)}
               className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
             >
               <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
@@ -186,11 +199,14 @@ const Products = () => {
                 alt={request.companyname}
                 className="w-36 h-36 mb-4 object-contain self-center"
               />
-              <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
+              <p 
+                className="text-center font-normal font-sans text-white text-sm bg-[#100DA6] transition hover:scale-90 hover:cursor-pointer"
+                onClick={handleMyProductsPopUp}
+              >
                 PROMAX SP 0W16 API SP
               </p>
               <div className="flex justify-between mt-2">
-                <img src={infoicon} alt="Info" className="w-8 h-8 cursor-pointer" />
+                <img src={infoicon} alt="Info" onClick={handleWorkFlowPopUp} className="w-8 h-8 cursor-pointer" />
                 <div className="flex items-center">
                   <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
                     <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
@@ -204,6 +220,20 @@ const Products = () => {
           ))}
         </div>
       </div>
+
+      {isMyProductsPopUpVisible && (
+        <ProductDetails
+          isVisible={isMyProductsPopUpVisible}
+          setVisibility={setIsMyProductsPopUpVisible}
+        />
+      )}
+
+      {isWorkFlowPopUpVisible && (
+        <NpcWorkFlowPopUp
+          isVisible={isWorkFlowPopUpVisible}
+          setVisibility={setIsWorkFlowPopUpVisible}
+        />
+      )}
     </div>
   );
 };
