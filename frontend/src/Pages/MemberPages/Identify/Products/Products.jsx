@@ -226,7 +226,7 @@ const Products = () => {
                   <div
                     key={request.id}
                     onClick={() =>
-                      navigate(`/member/product-details/${request.id}`)
+                      navigate(`/member/product-details`)
                     }
                     className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200 cursor-pointer"
                   >
