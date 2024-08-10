@@ -8,6 +8,9 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
+import infoicon from "../../../../Images/infoicon.png";
+import addtorequest from "../../../../Images/addtorequest.png";
+import { FaPlus } from 'react-icons/fa';
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
@@ -175,23 +178,27 @@ const Products = () => {
               onClick={() => navigate(`/member/product-details`)}
               className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
             >
+              <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
+                GTIN: 6285561000957
+              </p>
               <img
                 src={listrequst}
                 alt={request.companyname}
                 className="w-36 h-36 mb-4 object-contain self-center"
               />
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col">
-                  <p className="font-sans text-sm text-secondary">
-                    {request.itemcode}
-                  </p>
-                  <p className="font-sans text-sm text-secondary">
-                    {request.companyname}
-                  </p>
+              <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
+                PROMAX SP 0W16 API SP
+              </p>
+              <div className="flex justify-between mt-2">
+                <img src={infoicon} alt="Info" className="w-8 h-8 cursor-pointer" />
+                <div className="flex items-center">
+                  <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
+                    <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
+                  </div>
+                  <div className="bg-[#100DA6] rounded-r-full px-3 py-1">
+                    <FaPlus className="text-white" size={20} />
+                  </div>
                 </div>
-                <button className="font-sans text-xs bg-secondary text-white py-1 px-2 rounded-lg shadow-xl">
-                  Add to Request
-                </button>
               </div>
             </div>
           ))}

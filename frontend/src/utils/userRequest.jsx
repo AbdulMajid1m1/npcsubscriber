@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import { baseUrl, baseUrlnpc } from './config.jsx';
+import { baseUrl, baseUrlnpc, npcSubscriberUrl } from './config.jsx';
 
 const newRequest = axios.create({
     baseURL: baseUrl,
@@ -16,3 +16,11 @@ const newRequestnpc = axios.create({
   withCredentials: true,
 });
 export { newRequestnpc };
+
+
+const newRequestnpcsubscriber = axios.create({
+  baseURL: npcSubscriberUrl,
+  withCredentials: true,
+});
+
+export { newRequestnpcsubscriber };
