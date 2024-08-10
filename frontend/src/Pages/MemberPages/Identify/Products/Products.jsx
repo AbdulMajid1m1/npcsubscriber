@@ -224,38 +224,34 @@ const Products = () => {
                 )
                 .map((request) => (
                   <div
-                    key={request.id}
-                    onClick={() =>
-                      navigate(`/member/product-details`)
-                    }
-                    className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200 cursor-pointer"
-                  >
-                    <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
-                      GTIN: {request.gcpGLNID}
-                    </p>
-                    <img
-                      src={listrequst}
-                      alt={request.BrandName}
-                      className="w-36 h-36 mb-4 object-contain self-center"
-                    />
-                    <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
-                      {request.barcode}
-                    </p>
-                    <div className="flex justify-between mt-2">
-                      <img
-                        src={infoicon}
-                        alt="Info"
-                        className="w-8 h-8 cursor-pointer"
-                      />
-                      <div className="flex items-center">
-                        <img
-                          src={addtorequest}
-                          alt="Add to Request"
-                          className="w-8 h-8 cursor-pointer"
-                        />
+                  key={request.id}
+                  onClick={() => navigate(`/member/product-details`)}
+                  className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
+                >
+                  <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
+                    GTIN:{request.gcpGLNID}
+                  </p>
+                  <img
+                    src={listrequst}
+                    alt={request.BrandName}
+                    className="w-36 h-36 mb-4 object-contain self-center"
+                  />
+                  <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
+                  {request.barcode}
+                  </p>
+                  <div className="flex justify-between mt-2">
+                    <img src={infoicon} alt="Info" className="w-8 h-8 cursor-pointer" />
+                    <div className="flex items-center">
+                      <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
+                        <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
+                      </div>
+                      <div className="bg-[#100DA6] rounded-r-full px-3 py-1">
+                        <FaPlus className="text-white" size={20} />
                       </div>
                     </div>
                   </div>
+                </div>
+
                 ))}
             </div>
           </>
