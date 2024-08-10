@@ -21,12 +21,14 @@ const Products = () => {
   // Sample data for requests
   const requests = Array.from({ length: 20 }, (_, index) => ({
     id: index + 12345,
-    name: `Request #${index + 12345}`,
+    itemcode: `Request #${index + 12345}`,
+    companyname: `Company #${index + 12345}`,
   }));
 
   // Filter requests based on the search term
   const filteredRequests = requests.filter((request) =>
-    request.name.toLowerCase().includes(searchTerm.toLowerCase())
+    request.itemcode.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    request.companyname.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   return (
@@ -147,21 +149,31 @@ const Products = () => {
             Search by Product Classifications
           </h2>
         </div>
-        <div className="grid 2xl:grid-cols-8 lg:grid-cols-5 md:grid-cols-3 grid-cols-2 gap-6">
+        <div className="grid 2xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
           {filteredRequests.map((request) => (
             <div
               key={request.id}
               onClick={() => navigate(`/member/product-details`)}
-              className="flex flex-col items-center border border-[#71BAEF] rounded-lg p-4 shadow-xl hover:shadow-md transition-shadow duration-200"
+              className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
             >
               <img
                 src={listrequst}
-                alt={request.name}
-                className="w-36 h-36 mb-4 object-contain"
+                alt={request.companyname}
+                className="w-36 h-36 mb-4 object-contain self-center"
               />
-              <p className="text-center font-normal font-sans text-secondary">
-                {request.name}
-              </p>
+              <div className="flex justify-between items-center">
+                <div className="flex flex-col">
+                  <p className="font-sans text-sm text-secondary">
+                    {request.itemcode}
+                  </p>
+                  <p className="font-sans text-sm text-secondary">
+                    {request.companyname}
+                  </p>
+                </div>
+                <button className="font-sans text-xs bg-secondary text-white py-1 px-2 rounded-lg shadow-xl">
+                  Add to Request
+                </button>
+              </div>
             </div>
           ))}
         </div>
