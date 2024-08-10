@@ -21,16 +21,16 @@ const MemberLogin = () => {
     setLoading(true);
     
     try {
-      const response = await newRequestnpc.post("/npcUser/login", {
+      const response = await newRequestnpc.post("/npcUsers/login", {
         email: email,
         password: password,
       });
-        console.log(response?.data);
-        sessionStorage.setItem("memberdata", JSON.stringify(response.data));
-        navigate("/select-gln");
+        // console.log(response?.data);
+        sessionStorage.setItem("npcUserLoginData", JSON.stringify(response.data));
+        navigate("/member/dashboard");
         toast.success(response?.data?.message || "Login Successful");
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
       toast.error(error?.response?.data?.message || "Login Failed");
       setLoading(false);
     }
@@ -61,8 +61,8 @@ const MemberLogin = () => {
             />
           </div>
 
-          {/* <form onSubmit={handleSubmit} className="w-full flex justify-center items-center h-[45%]"> */}
-          <form className="w-full flex justify-center items-center h-[45%]" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="w-full flex justify-center items-center h-[45%]">
+          {/* <form className="w-full flex justify-center items-center h-[45%]"> */}
             {/* username */}
             <div className="w-full sm:w-[50%] sm:px-0 px-4">
               <label
@@ -103,7 +103,6 @@ const MemberLogin = () => {
                   <Button
                     variant="contained"
                     type="submit"
-                    // onClick={() => navigate("/select-gln")}
                     style={{ backgroundColor: '#B6BAD6', color: '#ffffff' }}
                     disabled={loading}
                     className="w-full bg-[#B6BAD6] border-b-2 border-[#350F9F] hover:bg-[#9699b1] shadow-xl mb-6 text-white font-medium font-body text-xl rounded-md px-5 py-2"
