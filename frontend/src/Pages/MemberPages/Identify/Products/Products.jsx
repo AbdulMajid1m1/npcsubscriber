@@ -66,6 +66,7 @@ const Products = () => {
     { name: "AI Search", icon: "" },
   ];
 
+
   const fetchProducts = async () => {
     setLoading(true);
     try {
@@ -323,7 +324,12 @@ const Products = () => {
                   </p>
                   </div>
                   <div className="flex justify-between mt-2">
-                    <img src={infoicon} alt="Info" className="w-8 h-8 cursor-pointer" />
+                    <img 
+                      src={infoicon} 
+                      alt="Info" 
+                      className="w-8 h-8 cursor-pointer" 
+                      onClick={() => handleWorkFlowPopUp(request)}
+                    />
                     <div className="flex items-center">
                       <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
                         <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
