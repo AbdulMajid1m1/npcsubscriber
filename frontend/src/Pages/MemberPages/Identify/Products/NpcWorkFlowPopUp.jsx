@@ -12,8 +12,12 @@ import storage from "../../../../Images/digitalLinks/storage.png";
 import cert from "../../../../Images/digitalLinks/cert.png";
 import haccp from "../../../../Images/digitalLinks/haccp.png";
 import halal from "../../../../Images/digitalLinks/halal.png";
+import { RxCrossCircled } from "react-icons/rx";
 
-const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
+import { FaCross } from "react-icons/fa";
+
+const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
+  console.log(data);
   const handleClosePopUp = () => {
     setVisibility(false);
   };
@@ -73,11 +77,25 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                       </h3>
                       <div className="w-14 h-14 absolute top-6 right-8 flex items-center justify-center bg-white border-4 border-blue-700 rounded-full">
                         <div className="w-10 h-10 flex items-center justify-center rounded-full">
-                          <img
-                            src={check}
-                            alt="Check Icon"
-                            className="w-10 h-10"
-                          />
+                          {!data.barcode ||
+                          !data.Origin ||
+                          !data.countrySale ||
+                          !data.unit ||
+                          !data.gpc ||
+                          !data.front_image ||
+                          !data.BrandName ? (
+                            <div className="flex items-center">
+                              <RxCrossCircled className="w-10 h-10 text-red-600" />
+                            </div>
+                          ) : (
+                            <div className="flex items-center">
+                              <img
+                                src={check}
+                                alt="Check Icon"
+                                className="w-9 h-9"
+                              />
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -95,64 +113,92 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                         </div>
                         <div className="ml-6 flex-grow">
                           <p className="font-medium font-sans text-white bg-blue-900 px-2 rounded-t-md">
-                            GTIN: 6285561000957
+                            GTIN: {data.barcode}
                           </p>
                           <ul className="text-sm mt-2 space-y-2 rounded-lg">
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Brand name</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.BrandName ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Product description</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.HsDescription ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Product image URL</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.front_image ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Global product category</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.gpc ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Net content & unit </span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.unit ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Country of sale</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.countrySale ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                             <li className="flex justify-between items-center bg-white px-2">
                               <span>Country of origin</span>
-                              <img
-                                src={check}
-                                alt="Check Icon"
-                                className="w-5 h-5"
-                              />
+                              {data.Origin ? (
+                                <img
+                                  src={check}
+                                  alt="Check Icon"
+                                  className="w-5 h-5"
+                                />
+                              ) : (
+                                <RxCrossCircled className="w-5 h-5 text-red-600" />
+                              )}
                             </li>
                           </ul>
                         </div>
@@ -163,9 +209,28 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                         Status:
                       </span>
                       <span className="text-xl font-sans font-bold text-[#06C937]">
-                        VBG Compliant
+                        {!data.barcode ||
+                        !data.Origin ||
+                        !data.countrySale ||
+                        !data.unit ||
+                        !data.gpc ||
+                        !data.front_image ||
+                        !data.BrandName ? (
+                          <div className="flex items-center">
+                            <p className="text-red-600">VBG Non Compliant</p>
+                            <RxCrossCircled className="w-5 h-5 text-red-600" />
+                          </div>
+                        ) : (
+                          <div className="flex items-center">
+                            <p>VBG Compliant</p>
+                            <img
+                              src={check}
+                              alt="Check Icon"
+                              className="w-9 h-9"
+                            />
+                          </div>
+                        )}
                       </span>
-                      <img src={check} alt="Check Icon" className="w-9 h-9" />
                     </div>
                   </div>
 
@@ -201,7 +266,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                           className="h-8 w-full object-contain"
                         />
                         <p className="text-secondary text-sm text-center">
-                         Efficiency
+                          Efficiency
                         </p>
                       </div>
                       {/* Row 2 */}

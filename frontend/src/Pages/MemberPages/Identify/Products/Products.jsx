@@ -12,23 +12,56 @@ import {
 } from "react-icons/io";
 import infoicon from "../../../../Images/infoicon.png";
 import addtorequest from "../../../../Images/addtorequest.png";
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus } from "react-icons/fa";
 import ProductDetails from "./ProductDetails";
 import NpcWorkFlowPopUp from "./NpcWorkFlowPopUp";
 import { FaPlus } from "react-icons/fa";
 import { ImSpinner6 } from "react-icons/im";
 import { newRequestnpc } from "../../../../utils/userRequest";
 import { toast } from "react-toastify";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
+  const [selectedWorkflowPopup, setSelectedWorkflowPopup] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
   const [totalPages, setTotalPages] = useState(1);
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
+  const [data, setData] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `http://gs1ksa.org:3091/api/products?user_id=3716`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiY2x0aXowN2tlMDAwMTEza24xOHIwcHE3NyIsImVtYWlsIjoiYWJkdWxtYWppZDFtMkBnbWFpbC5jb20iLCJpc19zdXBlcl9hZG1pbiI6MSwidXNlcm5hbWUiOiJBYmR1bCBNYWppZCIsInBlcm1pc3Npb25zIjpbIm1lbWJlcnMiLCJicmFuZHMiLCJndGluX2JhcmNvZGUiLCJnbG5fbG9jYXRpb24iLCJzc2NjIiwiZm9yZWlnbl9ndGluIiwicGF5bWVudF9zbGlwc19mb3JlaWduX2d0aW4iLCJvbGRfaW5hY3RpdmVfbWVtYmVycyIsImhlbHBfZGVzayIsInN0YWZmX2hlbHBfZGVzayIsInByb2R1Y3RfcGFja2FnaW5nIiwib3RoZXJfcHJvZHVjdHMiLCJjcl9udW1iZXIiXSwicm9sZXMiOlsiTWFya2V0aW5nIFN0YWZmIl0sImlhdCI6MTcyMzI3MTQ3OSwiZXhwIjoxNzMxMDQ3NDc5fQ.T0Fjd3ca4EFuzGwtpgTRhSieWgcDTBHzTsTwdC16-3A`,
+          },
+        }
+      );
+      console.log(response.data);
+      // console.log(response.data);
+      setData(response?.data || []);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+      toast.error(err?.response?.data?.error || "Something went wrong");
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const tabs = [
     { name: "Standard Search", icon: "" },
@@ -102,14 +135,25 @@ const Products = () => {
 
   }
 
+  console.log("data", data);
+  const filteredRequests =
+    data &&
+    data.filter(
+      (request) =>
+        request.HSCODES?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        request.BrandName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+    );
 
-  const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] = useState(false);
-  const handleMyProductsPopUp = () => {
+  const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] =
+    useState(false);
+  const handleMyProductsPopUp = (data) => {
     setIsMyProductsPopUpVisible(true);
   };
 
   const [isWorkFlowPopUpVisible, setIsWorkFlowPopUpVisible] = useState(false);
-  const handleWorkFlowPopUp = () => {
+  const handleWorkFlowPopUp = (data) => {
+    console.log("data", data);
+    setSelectedWorkflowPopup(data);
     setIsWorkFlowPopUpVisible(true);
   };
 
@@ -339,6 +383,7 @@ const Products = () => {
         <NpcWorkFlowPopUp
           isVisible={isWorkFlowPopUpVisible}
           setVisibility={setIsWorkFlowPopUpVisible}
+          data={selectedWorkflowPopup}
         />
       )}
     </div>
