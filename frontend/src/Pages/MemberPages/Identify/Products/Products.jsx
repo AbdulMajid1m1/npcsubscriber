@@ -182,25 +182,30 @@ const Products = () => {
               modules={[Pagination, Autoplay, Navigation]}
               className="mySwiper"
             >
-              {filteredRequests.map((request) => (
-                <SwiperSlide key={request.id}>
-                  <div
-                    // onClick={() => navigate(`/member/product-details`)}
-                    className="flex flex-col items-center justify-center w-full h-60 transition-transform transform hover:scale-105"
-                  >
-                    <div className="w-32 h-32 mb-2 overflow-hidden rounded-full border border-[#71BAEF] shadow-lg">
-                      <img
-                        src={listrequst}
-                        alt={request.name}
-                        className="object-cover w-full h-full"
-                      />
+              {filteredRequests
+                .splice(
+                  0,
+                  filteredRequests.length > 6 ? 6 : filteredRequests.length
+                )
+                .map((request) => (
+                  <SwiperSlide key={request.id}>
+                    <div
+                      // onClick={() => navigate(`/member/product-details`)}
+                      className="flex flex-col items-center justify-center w-full h-60 transition-transform transform hover:scale-105"
+                    >
+                      <div className="w-32 h-32 mb-2 overflow-hidden rounded-full border border-[#71BAEF] shadow-lg">
+                        <img
+                          src={listrequst}
+                          alt={request.name}
+                          className="object-cover w-full h-full"
+                        />
+                      </div>
+                      <p className="text-center font-normal font-sans text-secondary">
+                        {request.barcode}
+                      </p>
                     </div>
-                    <p className="text-center font-normal font-sans text-secondary">
-                      {request.name}
-                    </p>
-                  </div>
-                </SwiperSlide>
-              ))}
+                  </SwiperSlide>
+                ))}
             </Swiper>
             <div
               id="swiper-button-prev"
