@@ -1,11 +1,6 @@
 import React from "react";
 import brandimage from "../../../../Images/brandimage.png";
 import check from "../../../../Images/check.png";
-import row1 from "../../../../Images/npcworkflow/row1.png";
-import row2 from "../../../../Images/npcworkflow/row2.png";
-import row3 from "../../../../Images/npcworkflow/row3.png";
-import row4 from "../../../../Images/npcworkflow/row4.png";
-import row6 from "../../../../Images/npcworkflow/row6.png";
 import packaging from "../../../../Images/digitalLinks/packaging.png";
 import qulaitymark from "../../../../Images/digitalLinks/qulaitymark.png";
 import efficiency from "../../../../Images/digitalLinks/efficiency.png";
@@ -14,6 +9,9 @@ import certificate from "../../../../Images/digitalLinks/certificate .png";
 import cocconformity from "../../../../Images/digitalLinks/cocconformity.png";
 import productcontents from "../../../../Images/digitalLinks/productcontents.png";
 import storage from "../../../../Images/digitalLinks/storage.png";
+import cert from "../../../../Images/digitalLinks/cert.png";
+import haccp from "../../../../Images/digitalLinks/haccp.png";
+import halal from "../../../../Images/digitalLinks/halal.png";
 
 const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
   const handleClosePopUp = () => {
@@ -302,60 +300,19 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                       </div>
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
-                          src={qulaitymark}
-                          alt="Compliance 2"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Quality Mark
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={efficiency}
-                          alt="Compliance 3"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Efficiency
-                        </p>
-                      </div>
-                      {/* Row 2 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
                           src={safetyinformation}
-                          alt="Compliance 4"
+                          alt="Compliance 3"
                           className="h-8 w-full object-contain"
                         />
                         <p className="text-secondary text-sm text-center">
                           Safety Information
                         </p>
                       </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={certificate}
-                          alt="Compliance 5"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          IECEE Certificate
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={cocconformity}
-                          alt="Compliance 6"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Coc Conformity
-                        </p>
-                      </div>
-                      {/* Row 3 */}
+                      {/* Row 2 */}
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
                           src={productcontents}
-                          alt="Compliance 7"
+                          alt="Compliance 4"
                           className="h-8 w-full object-contain"
                         />
                         <p className="text-secondary text-sm text-center">
@@ -365,11 +322,42 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility }) => {
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
                           src={storage}
-                          alt="Compliance 8"
+                          alt="Compliance 5"
                           className="h-8 w-full object-contain"
                         />
                         <p className="text-secondary text-sm text-center">
                           Storage
+                        </p>
+                      </div>
+                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                        <img
+                          src={haccp}
+                          alt="Compliance 6"
+                          className="h-8 w-full object-contain"
+                        />
+                        <p className="text-secondary text-sm text-center">
+                          HACCP
+                        </p>
+                      </div>
+                      {/* Row 3 */}
+                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                        <img
+                          src={halal}
+                          alt="Compliance 7"
+                          className="h-8 w-full object-contain"
+                        />
+                        <p className="text-secondary text-sm text-center">
+                          Halal Food
+                        </p>
+                      </div>
+                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                        <img
+                          src={cert}
+                          alt="Compliance 8"
+                          className="h-8 w-full object-contain"
+                        />
+                        <p className="text-secondary text-sm text-center">
+                          TUV
                         </p>
                       </div>
                     </div>
