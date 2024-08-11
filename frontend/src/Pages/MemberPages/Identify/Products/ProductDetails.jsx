@@ -6,7 +6,8 @@ import image3 from "../../../../Images/productsdetails/image3.png";
 import image4 from "../../../../Images/productsdetails/image4.png";
 import "./ProductDetails.css";
 
-const ProductDetails = ({ isVisible, setVisibility }) => {
+const ProductDetails = ({ isVisible, setVisibility, data }) => {
+  console.log("data",data);
   const { t, i18n } = useTranslation();
 
   // List of images
@@ -35,7 +36,10 @@ const ProductDetails = ({ isVisible, setVisibility }) => {
       {isVisible && (
         <div className="popup-overlay z-50">
           <div className="popup-container h-auto sm:w-[90%] w-full">
-            <div className="w-full"  style={{ maxHeight: "90vh", overflowY: "auto" }}>
+            <div
+              className="w-full"
+              style={{ maxHeight: "90vh", overflowY: "auto" }}
+            >
               <div className="flex justify-end w-full">
                 <button
                   className="text-gray-500 hover:text-gray-700 focus:outline-none"

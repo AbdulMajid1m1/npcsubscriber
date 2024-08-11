@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import listrequst from "../../../../Images/listrequst.png";
 import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -10,14 +10,47 @@ import { IoIosArrowDroprightCircle } from "react-icons/io";
 import { IoIosArrowDropleftCircle } from "react-icons/io";
 import infoicon from "../../../../Images/infoicon.png";
 import addtorequest from "../../../../Images/addtorequest.png";
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus } from "react-icons/fa";
 import ProductDetails from "./ProductDetails";
 import NpcWorkFlowPopUp from "./NpcWorkFlowPopUp";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
+  const [selectedWorkflowPopup, setSelectedWorkflowPopup] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const fetchData = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.get(
+        `http://gs1ksa.org:3091/api/products?user_id=3716`,
+        {
+          headers: {
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiY2x0aXowN2tlMDAwMTEza24xOHIwcHE3NyIsImVtYWlsIjoiYWJkdWxtYWppZDFtMkBnbWFpbC5jb20iLCJpc19zdXBlcl9hZG1pbiI6MSwidXNlcm5hbWUiOiJBYmR1bCBNYWppZCIsInBlcm1pc3Npb25zIjpbIm1lbWJlcnMiLCJicmFuZHMiLCJndGluX2JhcmNvZGUiLCJnbG5fbG9jYXRpb24iLCJzc2NjIiwiZm9yZWlnbl9ndGluIiwicGF5bWVudF9zbGlwc19mb3JlaWduX2d0aW4iLCJvbGRfaW5hY3RpdmVfbWVtYmVycyIsImhlbHBfZGVzayIsInN0YWZmX2hlbHBfZGVzayIsInByb2R1Y3RfcGFja2FnaW5nIiwib3RoZXJfcHJvZHVjdHMiLCJjcl9udW1iZXIiXSwicm9sZXMiOlsiTWFya2V0aW5nIFN0YWZmIl0sImlhdCI6MTcyMzI3MTQ3OSwiZXhwIjoxNzMxMDQ3NDc5fQ.T0Fjd3ca4EFuzGwtpgTRhSieWgcDTBHzTsTwdC16-3A`,
+          },
+        }
+      );
+      console.log(response.data);
+      // console.log(response.data);
+      setData(response?.data || []);
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      setIsLoading(false);
+      toast.error(err?.response?.data?.error || "Something went wrong");
+    }
+  };
+
+  // Fetch data on component mount
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   const tabs = [
     { name: "Standard Search", icon: "" },
@@ -25,27 +58,33 @@ const Products = () => {
   ];
 
   // Sample data for requests
-  const requests = Array.from({ length: 20 }, (_, index) => ({
-    id: index + 12345,
-    itemcode: `Request #${index + 12345}`,
-    companyname: `Company #${index + 12345}`,
-  }));
+  // const requests = Array.from({ length: 20 }, (_, index) => ({
+  //   id: index + 12345,
+  //   itemcode: `Request #${index + 12345}`,
+  //   companyname: `Company #${index + 12345}`,
+  // }));
 
   // Filter requests based on the search term
-  const filteredRequests = requests.filter(
-    (request) =>
-      request.itemcode.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      request.companyname.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
+  console.log("data", data);
+  const filteredRequests =
+    data &&
+    data.filter(
+      (request) =>
+        request.HSCODES?.toLowerCase()?.includes(searchTerm?.toLowerCase()) ||
+        request.BrandName?.toLowerCase()?.includes(searchTerm?.toLowerCase())
+    );
 
-  const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] = useState(false);
-  const handleMyProductsPopUp = () => {
+  const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] =
+    useState(false);
+  const handleMyProductsPopUp = (data) => {
     setIsMyProductsPopUpVisible(true);
   };
 
   const [isWorkFlowPopUpVisible, setIsWorkFlowPopUpVisible] = useState(false);
-  const handleWorkFlowPopUp = () => {
+  const handleWorkFlowPopUp = (data) => {
+    console.log("data", data);
+    setSelectedWorkflowPopup(data);
     setIsWorkFlowPopUpVisible(true);
   };
 
@@ -192,24 +231,33 @@ const Products = () => {
               className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
             >
               <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
-                GTIN: 6285561000957
+                GTIN: {request.barcode}
               </p>
               <img
                 src={listrequst}
-                alt={request.companyname}
+                alt={request.BrandName}
                 className="w-36 h-36 mb-4 object-contain self-center"
               />
-              <p 
+              <p
                 className="text-center font-normal font-sans text-white text-sm bg-[#100DA6] transition hover:scale-90 hover:cursor-pointer"
                 onClick={handleMyProductsPopUp}
               >
-                PROMAX SP 0W16 API SP
+                {request.productnameenglish}{" "}
               </p>
               <div className="flex justify-between mt-2">
-                <img src={infoicon} alt="Info" onClick={handleWorkFlowPopUp} className="w-8 h-8 cursor-pointer" />
+                <img
+                  src={infoicon}
+                  alt="Info"
+                  onClick={() => handleWorkFlowPopUp(request)}
+                  className="w-8 h-8 cursor-pointer"
+                />
                 <div className="flex items-center">
                   <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
-                    <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
+                    <img
+                      src={addtorequest}
+                      alt="Info"
+                      className="w-6 h-5 cursor-pointer"
+                    />
                   </div>
                   <div className="bg-[#100DA6] rounded-r-full px-3 py-1">
                     <FaPlus className="text-white" size={20} />
@@ -232,6 +280,7 @@ const Products = () => {
         <NpcWorkFlowPopUp
           isVisible={isWorkFlowPopUpVisible}
           setVisibility={setIsWorkFlowPopUpVisible}
+          data={selectedWorkflowPopup}
         />
       )}
     </div>
