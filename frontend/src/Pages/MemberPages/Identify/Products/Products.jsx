@@ -12,16 +12,13 @@ import {
 } from "react-icons/io";
 import infoicon from "../../../../Images/infoicon.png";
 import addtorequest from "../../../../Images/addtorequest.png";
-<<<<<<< HEAD
 import { FaPlus } from 'react-icons/fa';
 import ProductDetails from "./ProductDetails";
 import NpcWorkFlowPopUp from "./NpcWorkFlowPopUp";
-=======
 import { FaPlus } from "react-icons/fa";
 import { ImSpinner6 } from "react-icons/im";
 import { newRequestnpc } from "../../../../utils/userRequest";
 import { toast } from "react-toastify";
->>>>>>> 86b060d7850000a19ab56010ffe5be8ff6b10c77
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
@@ -179,46 +176,6 @@ const Products = () => {
           <div className="flex justify-center items-center mt-10">
             <ImSpinner6 className="text-blue-500 text-4xl animate-spin" />
           </div>
-<<<<<<< HEAD
-        </div>
-
-        {/* Grid of Requests */}
-        <div className="sm:py-5 py-3">
-          <h2 className="text-secondary font-semibold sm:text-2xl text-lg font-sans">
-            Search by Product Classifications
-          </h2>
-        </div>
-        <div className="grid 2xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-3 grid-cols-2 gap-6">
-          {filteredRequests.map((request) => (
-            <div
-              key={request.id}
-              // onClick={() => navigate(`/member/product-details`)}
-              className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
-            >
-              <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
-                GTIN: 6285561000957
-              </p>
-              <img
-                src={listrequst}
-                alt={request.companyname}
-                className="w-36 h-36 mb-4 object-contain self-center"
-              />
-              <p 
-                className="text-center font-normal font-sans text-white text-sm bg-[#100DA6] transition hover:scale-90 hover:cursor-pointer"
-                onClick={handleMyProductsPopUp}
-              >
-                PROMAX SP 0W16 API SP
-              </p>
-              <div className="flex justify-between mt-2">
-                <img src={infoicon} alt="Info" onClick={handleWorkFlowPopUp} className="w-8 h-8 cursor-pointer" />
-                <div className="flex items-center">
-                  <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
-                    <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
-                  </div>
-                  <div className="bg-[#100DA6] rounded-r-full px-3 py-1">
-                    <FaPlus className="text-white" size={20} />
-                  </div>
-=======
         ) : (
           <>
             {/* Swiper Component */}
@@ -282,7 +239,6 @@ const Products = () => {
                   className="absolute right-0 top-1/2 z-20 -translate-y-1/2 transform md:right-1"
                 >
                   <IoIosArrowDroprightCircle className="cursor-pointer rounded-full border-white text-4xl text-black opacity-40 hover:border hover:opacity-80" />
->>>>>>> 86b060d7850000a19ab56010ffe5be8ff6b10c77
                 </div>
               </div>
             </div>
