@@ -32,18 +32,18 @@ const App = () => {
       setIsOpen(!isOpen);
     };
 
-    return (
-      <div className="main-layout-container">
-        <SideNav isOpen={isOpen} toggleSideNav={toggleSideNav} />
-        <div
-          className={`transition-all duration-300 ${
-            isOpen ? `${i18n.language==='ar'?'lg:mr-[300px]':'lg:ml-[300px]'}` : "lg:ml-0"
-          } `}
-        >
-          {children}
-        </div>
-      </div>
-    );
+   return (
+     <div className="main-layout-container">
+       <SideNav isOpen={isOpen} toggleSideNav={toggleSideNav} />
+       <div
+         className={`transition-all duration-300 ${
+           isOpen ? "lg:ml-[300px]" : "lg:mr-0"
+         }`}
+       >
+         {children}
+       </div>
+     </div>
+   );
   };
 
   const UserLayout = () => {

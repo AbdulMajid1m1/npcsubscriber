@@ -14,6 +14,8 @@ import infoicon from "../../../../Images/infoicon.png";
 import addtorequest from "../../../../Images/addtorequest.png";
 import { FaPlus } from "react-icons/fa";
 import { ImSpinner6 } from "react-icons/im";
+import { newRequestnpc } from "../../../../utils/userRequest";
+import { toast } from "react-toastify";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
@@ -73,6 +75,29 @@ const Products = () => {
       handlePageChange(page);
     }
   };
+  
+    const updateBrandData = JSON.parse(sessionStorage.getItem("npcUserLoginData"));
+    console.log(updateBrandData.user.id);
+    
+
+  const cardfunction = (request)=>{
+    console.log(request.barcode);
+    
+  try {
+      const response = newRequestnpc.post("/master-data/createproductRequest", {
+        brand_owner_user_id: "clznpd8et0005aa7vzs5kqu95",
+        npc_user_id: updateBrandData.user.id,
+        status: "2",
+        barcode: request.barcode,
+      });
+        toast.success(response?.data?.message || "Add to Request Successful");
+    } catch (error) {
+      console.log(error);
+      toast.error(error?.response?.data?.message || "Login Failed");
+      setLoading(false);
+    }
+
+  }
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen">
@@ -225,9 +250,10 @@ const Products = () => {
                 .map((request) => (
                   <div
                   key={request.id}
-                  onClick={() => navigate(`/member/product-details`)}
                   className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
                 >
+                  <div 
+                  onClick={() => navigate(`/member/product-details`)}>
                   <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
                     GTIN:{request.gcpGLNID}
                   </p>
@@ -239,13 +265,14 @@ const Products = () => {
                   <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
                   {request.barcode}
                   </p>
+                  </div>
                   <div className="flex justify-between mt-2">
                     <img src={infoicon} alt="Info" className="w-8 h-8 cursor-pointer" />
                     <div className="flex items-center">
                       <div className="flex items-center bg-[#FFB484] rounded-l-full px-2 py-1">
                         <img src={addtorequest} alt="Info" className="w-6 h-5 cursor-pointer" />
                       </div>
-                      <div className="bg-[#100DA6] rounded-r-full px-3 py-1">
+                      <div className="bg-[#100DA6] rounded-r-full px-3 py-1 cursor-pointer" onClick={()=>cardfunction(request)}>
                         <FaPlus className="text-white" size={20} />
                       </div>
                     </div>
