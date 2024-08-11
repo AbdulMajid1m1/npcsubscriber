@@ -8446,12 +8446,12 @@ export const allproductColumn = [
   {
     field: "brand_owner_user_id",
     headerName: "Brand owner User ID",
-    width: 180,
+    width: 220,
   },
   {
     field: "npc_user_id",
     headerName: "NPC User ID",
-    width: 180,
+    width: 220,
   },
   {
     field: "status",
