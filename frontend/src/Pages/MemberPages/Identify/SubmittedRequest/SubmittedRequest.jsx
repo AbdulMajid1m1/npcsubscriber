@@ -41,7 +41,8 @@ const fetchData = async () => {
   try {
     const response = await newRequestnpc.get("/master-data/getAllProductRequests");
     console.log(response?.data);
-    setData(response?.data || []); // Ensure data is always an array
+     const filteredData = response?.data?.filter(item => item.status === '0' || item.status === "2") || [];
+    setData(filteredData|| []); // Ensure data is always an array
     setIsLoading(false);
   } catch (err) {
     console.log(err);

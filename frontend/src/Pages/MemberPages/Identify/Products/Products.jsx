@@ -36,7 +36,7 @@ const Products = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://gs1ksa.org:3091/api/products?page=${currentPage}&pageSize=${pageSize}`,
+        `http://gs1ksa.org:3091/api/products/paginatedProducts?page=${currentPage}&pageSize=${pageSize}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -85,7 +85,7 @@ const Products = () => {
     
   try {
       const response = newRequestnpc.post("/master-data/createproductRequest", {
-        brand_owner_user_id: "clznpd8et0005aa7vzs5kqu95",
+        brand_owner_user_id: "3716",
         npc_user_id: updateBrandData.user.id,
         status: "2",
         barcode: request.barcode,
