@@ -15,10 +15,8 @@ import addtorequest from "../../../../Images/addtorequest.png";
 import { FaPlus } from "react-icons/fa";
 import ProductDetails from "./ProductDetails";
 import NpcWorkFlowPopUp from "./NpcWorkFlowPopUp";
-import { FaPlus } from "react-icons/fa";
 import { ImSpinner6 } from "react-icons/im";
 import { newRequestnpc } from "../../../../utils/userRequest";
-import { toast } from "react-toastify";
 import { toast } from "react-toastify";
 import axios from "axios";
 
