@@ -8441,3 +8441,80 @@ export const allTemplatesColumn = (t) => [
     },
   },
 ];
+
+export const allproductColumn = [
+  {
+    field: "brand_owner_user_id",
+    headerName: "Brand owner User ID",
+    width: 180,
+  },
+  {
+    field: "npc_user_id",
+    headerName: "NPC User ID",
+    width: 180,
+  },
+  {
+    field: "status",
+    headerName: "Status",
+    width: 120,
+   renderCell: params => {
+  const status = params.row.status;
+  let padding, text;
+
+  if (status === "1") {
+    padding = '2px';
+    text = 'Approved';
+  } else if (status === "2") {
+    padding = '5px';
+    text = 'Pending';
+  } else {
+    padding = '5px';
+    text = 'Rejected';
+  }
+
+  return (
+    <div
+      style={{
+        padding: padding,
+        paddingLeft: padding,
+        paddingRight: padding,
+        borderRadius: '20px',
+        border: '2px solid',
+        borderColor: status === "1" ? 'green' : (status === "2" ? 'orange' : 'red'),
+        color: status === "1" ? 'green' : (status === "2" ? 'orange' : 'red'),
+      }}
+    >
+      {text}
+    </div>
+  );
+},
+
+  },
+  {
+    field: "barcode",
+    headerName: "Barcode",
+    width: 180,
+  },
+  {
+    field: "created_at",
+    headerName: "Created At",
+    width: 180,
+
+    type: "dateTime",
+    valueGetter: (params) => {
+      // Convert the string date to a Date object
+      return params.value ? new Date(params.value) : null;
+    },
+  },
+  {
+    field: "updated_at",
+    headerName: "Updated At",
+    width: 180,
+    type: "dateTime",
+    valueGetter: (params) => {
+      // Convert the string date to a Date object
+      return params.value ? new Date(params.value) : null;
+    },
+  },
+];
+

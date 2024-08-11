@@ -527,12 +527,12 @@ const DataTable = ({
           xtraSmallHeightTableScreens.includes(uniqueId)
             ? { height: "350px" }
             : smallHeightTableScreens.includes(uniqueId)
-            ? { height: "450px" }
-            : mediumHeightTableScreens.includes(uniqueId)
-              ? { height: "600px" }
-              : largeHeightTableScreens.includes(uniqueId)
-                ? { height: "700px" }
-                : { height: "500px" }
+              ? { height: "450px" }
+              : mediumHeightTableScreens.includes(uniqueId)
+                ? { height: "600px" }
+                : largeHeightTableScreens.includes(uniqueId)
+                  ? { height: "700px" }
+                  : { height: "500px" }
 
         }
       >
@@ -638,25 +638,21 @@ const DataTable = ({
           // rows={filteredData}
           rows={muiFilteredData}
 
-          // columns={reversedColumns}
-          // columns={(actionColumnVisibility !== false
-          //   ? (i18n && i18n.language === 'ar'
-          //     ? [...columnsName.reverse(), ...actionColumn, ...idColumn.slice(1), ...idColumn.slice(0, 1)]
-          //     : [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName])
-          //   : (i18n && i18n.language === 'ar'
-          //     ? [...columnsName.reverse(), ...idColumn]
-          //     : [...idColumn, ...columnsName])
-          // )}
-
+          // columns={
+          //   i18n.language === 'ar'
+          //     ? actionColumnVisibility !== false
+          //       ? [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName].reverse()
+          //       : [...idColumn, ...columnsName].reverse()
+          //     : actionColumnVisibility !== false
+          //       ? [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName]
+          //       : [...idColumn, ...columnsName]
+          // }
           columns={
-            i18n.language === 'ar'
-              ? actionColumnVisibility !== false
-                ? [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName].reverse()
-                : [...idColumn, ...columnsName].reverse()
-              : actionColumnVisibility !== false
-                ? [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName]
-                : [...idColumn, ...columnsName]
+            actionColumnVisibility !== false
+              ? [...idColumn.slice(0, 1), ...actionColumn, ...idColumn.slice(1), ...columnsName]
+              : [...idColumn, ...columnsName]
           }
+
           pageSize={30}
           // rowsPerPageOptions={[300, 500, 1000]}
           pageSizeOptions={[50, 100, { value: -1, label: "All" }]}

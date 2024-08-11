@@ -37,7 +37,7 @@
 //     setBrandShare(!brandShare);
 //   };
 
-  
+
 //   return (
 //     <>
 //       {/* <DashboardHeader /> */}
@@ -628,9 +628,8 @@ function SideNav({ isOpen, toggleSideNav }) {
         <div className="body-content">
           <div className="relative lg:block navbar-menu">
             <nav
-              className={`fixed top-0 transition-all bg-[#D0F2F3] lg:mt-0 mt-12 bottom-0 flex flex-col shadow bg-primary-sidebar overflow-hidden z-50 ${
-                isOpen ? "w-[300px]" : "w-0"
-              } left-0`}
+              className={`fixed top-0 transition-all bg-[#D0F2F3] lg:mt-0 mt-12 bottom-0 flex flex-col shadow bg-primary-sidebar overflow-hidden z-50 ${isOpen ? "w-[300px]" : "w-0"
+                } left-0`}
               id="sidenav"
             >
               <div className="flex justify-center items-center w-full px-4 pt-3 pb-3 border-b border-gray-300">
@@ -691,7 +690,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                         <ul className="text-sm flex flex-col gap-3">
                           <li>
                             <Link
-                              to={'/member/products'}
+                              to={"/member/products"}
                               className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
                             >
                               <div className="flex justify-center items-center gap-3 flex-row">
@@ -708,6 +707,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                           </li>
                           <li>
                             <Link
+                              to={"/member/SubmittedRequest"}
                               className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
                             >
                               <div className="flex justify-center items-center gap-3 flex-row">
@@ -724,8 +724,8 @@ function SideNav({ isOpen, toggleSideNav }) {
                           </li>
                           <li>
                             <Link
-                              className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
-                            >
+                              to={"/member/ApprovedRequest"}
+                              className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start">
                               <div className="flex justify-center items-center gap-3 flex-row">
                                 <img
                                   src={approvedrequest}
@@ -742,7 +742,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                       </div>
                     )}
                   </li>
-            
+
                   <li>
                     <div
                       className="flex items-start px-6 py-2 text-gray-700 group hover:text-gray-600 hover:bg-gray-100 cursor-pointer flex-row"
@@ -843,9 +843,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                         <div className="transition border-gray-500 dropdown-section nested-menu pl-3 ml-3">
                           <ul className="text-sm flex flex-col gap-3">
                             <li>
-                              <Link
-                                className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
-                              >
+                              <Link className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start">
                                 <div className="flex justify-center items-center gap-3 flex-row">
                                   <img
                                     src={MySharedData}
@@ -859,9 +857,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                               </Link>
                             </li>
                             <li>
-                              <Link
-                                className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start"
-                              >
+                              <Link className="flex items-center py-2 text-gray-700 rounded hover:bg-gray-100 pl-3 pr-4 justify-start">
                                 <div className="flex justify-center items-center gap-3 flex-row">
                                   <img
                                     src={verifiedbyGS1}
@@ -896,28 +892,26 @@ function SideNav({ isOpen, toggleSideNav }) {
                         </div>
                       </Link>
                     </li>
-                      <li>
-                    <Link
-                      to="/member/ApiGuide"
-                      className="flex items-center px-3 py-0 text-gray-700 group hover:text-gray-600 hover:bg-gray-100 flex-row"
-                    >
-                      <span className="drop-shadow-lg flex h-14 w-16 items-center justify-center rounded-lg bg-D2D180 bg-center text-center xl:p-2.5 mr-2">
-                        <img
-                          src={ApiGuideicon}
-                          alt="logo"
-                          className="w-7 h-7 object-cover"
-                        />
-                      </span>
-                      <span className="font-sans font-medium text-base my-auto -ml-3">
-                        API Guide
-                      </span>
-                    </Link>
-                  </li>
-
                     <li>
                       <Link
-                        className="flex items-center py-0 text-gray-700 rounded hover:bg-gray-100 pl-7 pr-7 justify-start"
+                        to="/member/ApiGuide"
+                        className="flex items-center px-3 py-0 text-gray-700 group hover:text-gray-600 hover:bg-gray-100 flex-row"
                       >
+                        <span className="drop-shadow-lg flex h-14 w-16 items-center justify-center rounded-lg bg-D2D180 bg-center text-center xl:p-2.5 mr-2">
+                          <img
+                            src={ApiGuideicon}
+                            alt="logo"
+                            className="w-7 h-7 object-cover"
+                          />
+                        </span>
+                        <span className="font-sans font-medium text-base my-auto -ml-3">
+                          API Guide
+                        </span>
+                      </Link>
+                    </li>
+
+                    <li>
+                      <Link className="flex items-center py-0 text-gray-700 rounded hover:bg-gray-100 pl-7 pr-7 justify-start">
                         <div className="flex justify-center items-center h-14 gap-3 flex-row">
                           <img
                             src={governance}
@@ -931,9 +925,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        className="flex items-center py-0 text-gray-700 rounded hover:bg-gray-100 pl-7 pr-7 justify-start"
-                      >
+                      <Link className="flex items-center py-0 text-gray-700 rounded hover:bg-gray-100 pl-7 pr-7 justify-start">
                         <div className="flex justify-center items-center h-14 gap-3 flex-row">
                           <img
                             src={validation}
@@ -965,16 +957,14 @@ function SideNav({ isOpen, toggleSideNav }) {
                       </span>
                     </Link>
                   </li>
-
                 </ul>
               </div>
             </nav>
           </div>
         </div>
         <div
-          className={`mx-auto transition-all content-wrapper ${
-            isOpen ? "lg:ml-[300px]" : "lg:ml-0"
-          }`}
+          className={`mx-auto transition-all content-wrapper ${isOpen ? "lg:ml-[300px]" : "lg:ml-0"
+            }`}
           id="dash"
         >
           <section className="sticky top-0 z-20 px-3 py-0 bg-[#1F0567] shadow text-gray-100 lg:px-5">

@@ -18,6 +18,8 @@ import SubscriberDashboard from "./Pages/MemberPages/SubscriberDashboard/Subscri
 import ApiGuide from "./Pages/MemberPages/ApiGuide/ApiGuide.jsx";
 import ApiHelpDesk from "./Pages/MemberPages/ApiGuide/ApiHelpDesk.jsx";
 import NpcWorkFlowPopUp from "./Pages/MemberPages/Identify/Products/NpcWorkFlowPopUp.jsx";
+import SubmittedRequest from "./Pages/MemberPages/Identify/SubmittedRequest/SubmittedRequest.jsx";
+import ApprovedRequest from "./Pages/MemberPages/Identify/ApprovedRequest/ApprovedRequest.jsx";
 
 const queryClient = new QueryClient();
 
@@ -31,18 +33,18 @@ const App = () => {
       setIsOpen(!isOpen);
     };
 
-    return (
-      <div className="main-layout-container">
-        <SideNav isOpen={isOpen} toggleSideNav={toggleSideNav} />
-        <div
-          className={`transition-all duration-300 ${
-            isOpen ? `${i18n.language==='ar'?'lg:mr-[300px]':'lg:ml-[300px]'}` : "lg:ml-0"
-          } `}
-        >
-          {children}
-        </div>
-      </div>
-    );
+   return (
+     <div className="main-layout-container">
+       <SideNav isOpen={isOpen} toggleSideNav={toggleSideNav} />
+       <div
+         className={`transition-all duration-300 ${
+           isOpen ? "lg:ml-[300px]" : "lg:mr-0"
+         }`}
+       >
+         {children}
+       </div>
+     </div>
+   );
   };
 
   const UserLayout = () => {
@@ -97,6 +99,9 @@ const App = () => {
                         <Route path="npc-work-flow" element={<NpcWorkFlowPopUp />} />
                          <Route path="ApiGuide" element={<ApiGuide />} />
                          <Route path="api-helpdesk" element={<ApiHelpDesk />} />
+                         <Route path="SubmittedRequest" element={<SubmittedRequest />} />
+                         <Route path="ApprovedRequest" element={<ApprovedRequest />} />
+
 
                       </Routes>
                     </MainLayout>

@@ -21,6 +21,7 @@ const Gtin = () => {
   const [data, setData] = useState([]);
   const { t, i18n } = useTranslation();
   const { selectedLanguage } = useLanguage();
+  
   // const memberDataString = sessionStorage.getItem('memberData');
   // const memberData = JSON.parse(memberDataString);
   // console.log(memberData);
