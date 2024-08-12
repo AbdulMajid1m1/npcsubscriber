@@ -24,6 +24,7 @@ import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
   const [selectedWorkflowPopup, setSelectedWorkflowPopup] = useState(null);
+  const [selectedMyProducts, setSelectedMyProducts] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize] = useState(10);
@@ -113,7 +114,7 @@ const Products = () => {
   };
   
     const updateBrandData = JSON.parse(sessionStorage.getItem("npcUserLoginData"));
-    console.log(updateBrandData.user.id);
+    // console.log(updateBrandData.user.id);
     
 
   const cardfunction = (request)=>{
@@ -147,6 +148,7 @@ const Products = () => {
   const [isMyProductsPopUpVisible, setIsMyProductsPopUpVisible] =
     useState(false);
   const handleMyProductsPopUp = (data) => {
+    setSelectedMyProducts(data);
     setIsMyProductsPopUpVisible(true);
   };
 
@@ -310,8 +312,7 @@ const Products = () => {
                   key={request.id}
                   className="flex flex-col border border-[#D1D5DB] rounded-lg p-2 shadow-lg hover:shadow-md transition-shadow duration-200"
                 >
-                  <div 
-                  onClick={() => navigate(`/member/product-details`)}>
+                  <div>
                   <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
                     GTIN:{request.barcode}
                   </p>
@@ -320,7 +321,7 @@ const Products = () => {
                     alt={request.BrandName}
                     className="w-full h-36 mb-4 object-contain self-center"
                   />
-                  <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
+                  <p onClick={() => handleMyProductsPopUp(request)} className="text-center font-normal font-sans hover:cursor-pointer transform hover:scale-95 text-white text-sm bg-[#100DA6]">
                   {request.productnameenglish}
                   </p>
                   </div>
@@ -381,6 +382,7 @@ const Products = () => {
         <ProductDetails
           isVisible={isMyProductsPopUpVisible}
           setVisibility={setIsMyProductsPopUpVisible}
+          data={selectedMyProducts}
         />
       )}
 

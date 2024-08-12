@@ -5,18 +5,19 @@ import image2 from "../../../../Images/productsdetails/image2.png";
 import image3 from "../../../../Images/productsdetails/image3.png";
 import image4 from "../../../../Images/productsdetails/image4.png";
 import "./ProductDetails.css";
+import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
 
 const ProductDetails = ({ isVisible, setVisibility, data }) => {
-  console.log("data",data);
+  // console.log("data",data);
   const { t, i18n } = useTranslation();
 
   // List of images
   const images = [
-    { src: image1, alt: "Shoe 1" },
-    { src: image2, alt: "Shoe 2" },
-    { src: image3, alt: "Shoe 3" },
-    { src: image4, alt: "Shoe 4" },
-    { src: image1, alt: "Shoe 5" },
+    { src: imageLiveUrl(data.front_image) || image1, alt: "Shoe 1"  },
+    { src: imageLiveUrl(data.back_image) || image2, alt: "Shoe 2" },
+    { src: imageLiveUrl(data.image_1) || image3, alt: "Shoe 3" },
+    { src: imageLiveUrl(data.image_2) || image4, alt: "Shoe 4" },
+    { src: imageLiveUrl(data.image_3) || image1, alt: "Shoe 4" },
   ];
 
   // State to store the index of the currently selected image
@@ -72,8 +73,7 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     Complete Data
                   </p>
                   <p className="font-sans text-base">
-                    This number is registered to company: : testing sample
-                    company
+                    This number is registered to company: :{" "} {data?.productnameenglish}
                   </p>
                 </div>
               </div>
@@ -93,7 +93,9 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                         <input
                           type="text"
                           placeholder="Enter Product Name[English]"
-                          className="p-2 pl-4 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.productnameenglish}
+                          disabled
+                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
@@ -104,7 +106,9 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                         <input
                           type="text"
                           placeholder="Enter Product Name[Arabic]"
-                          className="p-2 pl-4 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.productnamearabic}
+                          disabled
+                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                     </div>
@@ -116,9 +120,13 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                           {" "}
                           Brand Name [English / Arabic]{" "}
                         </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Enter Brand Name</option>
-                        </select>
+                        <input
+                        type="text"
+                          placeholder="Enter Brand Name[English / Arabic]"
+                          value={`${data?.BrandName} , ${data?.BrandNameAr}`}
+                          disabled
+                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                       <div className="flex flex-col w-full md:w-[48%]">
                         <div className="flex items-center gap-4">
@@ -130,10 +138,14 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                             <span>Add GPC by myself</span>
                           </label>
                         </div>
-                        <div className="flex items-center gap-2 mt-2">
-                          <select className="p-2 border rounded-full text-secondary placeholder:text-secondary w-full">
-                            <option>Select GPC</option>
-                          </select>
+                        <div className="flex items-center gap-2 w-full mt-2">
+                         <input 
+                          type="text"
+                          placeholder="Enter GPC"
+                          value={data?.gpc}
+                          disabled
+                          className="p-2 pl-4 border rounded-full w-full bg-white text-secondary placeholder:text-secondary"
+                        /> 
                         </div>
                       </div>
                     </div>
@@ -142,16 +154,22 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     <div className="flex flex-col md:flex-row justify-between items-center">
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Unit Code </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Enter Unit code</option>
-                        </select>
+                        <input
+                        type="text"
+                          placeholder="Enter unit code"
+                          value={data?.unit}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Size </span>
                         <input
                           type="text"
                           placeholder="Enter size"
-                          className="p-2 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.size}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                     </div>
@@ -160,15 +178,23 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     <div className="flex flex-col md:flex-row justify-between items-center">
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Origin </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Select origin</option>
-                        </select>
+                        <input 
+                        type="text"
+                          placeholder="Enter origin"
+                          value={data?.Origin}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Country of Sale </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Select country</option>
-                        </select>
+                        <input 
+                        type="text"
+                        placeholder="Enter country of sale"
+                          value={data?.countrySale}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                     </div>
                   </form>
@@ -188,15 +214,23 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                           {" "}
                           Product Description Language{" "}
                         </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Enter Product description language</option>
-                        </select>
+                        <input
+                          type="text"
+                          placeholder="Enter Product Description Language"
+                          value={data?.HsDescription}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Product Type </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Enter Product Type</option>
-                        </select>
+                        <input
+                          type="text"
+                          placeholder="Enter Product Type"
+                          value={data?.ProductType}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                     </div>
 
@@ -204,16 +238,22 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     <div className="flex flex-col md:flex-row justify-between items-center">
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Package Type </span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary">
-                          <option>Select package type</option>
-                        </select>
+                        <input
+                        type="text"
+                          placeholder="Enter Package Type"
+                          value={data?.PackagingType}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Product URL </span>
                         <input
                           type="url"
                           placeholder="Enter URL"
-                          className="p-2 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.product_url}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                     </div>
@@ -222,9 +262,13 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     <div className="flex flex-col md:flex-row justify-between items-start">
                       <div className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2">HS-Code</span>
-                        <select className="p-2 border rounded-full text-secondary placeholder:text-secondary w-full">
-                          <option>Product Name[English]</option>
-                        </select>
+                        <input
+                        type="text"
+                          placeholder="Enter HS-Code"
+                          value={data?.HSCODES}
+                          disabled
+                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                        />
                         <label className="flex items-center gap-1 mt-2">
                           <input type="checkbox" className="form-checkbox" />
                           <span>Add HS-Code by myself</span>
@@ -241,7 +285,9 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                         </span>
                         <input
                           placeholder="Automatic"
-                          className="p-2 pl-4 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.details_page}
+                          disabled
+                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
@@ -251,7 +297,9 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                         </span>
                         <input
                           placeholder="Automatic"
-                          className="p-2 pl-4 border rounded-full text-secondary placeholder:text-secondary"
+                          value={data?.details_page_ar}
+                          disabled
+                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
                         />
                       </label>
                     </div>

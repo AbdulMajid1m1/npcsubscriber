@@ -1,5 +1,4 @@
 import React from "react";
-import brandimage from "../../../../Images/brandimage.png";
 import check from "../../../../Images/check.png";
 import packaging from "../../../../Images/digitalLinks/packaging.png";
 import qulaitymark from "../../../../Images/digitalLinks/qulaitymark.png";
