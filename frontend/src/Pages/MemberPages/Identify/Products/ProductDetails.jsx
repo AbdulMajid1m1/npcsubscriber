@@ -6,6 +6,8 @@ import image3 from "../../../../Images/productsdetails/image3.png";
 import image4 from "../../../../Images/productsdetails/image4.png";
 import "./ProductDetails.css";
 import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
+import Barcode from "react-barcode";
+import { QRCodeSVG } from "qrcode.react";
 
 const ProductDetails = ({ isVisible, setVisibility, data }) => {
   // console.log("data",data);
@@ -310,40 +312,48 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
               {/* Thumbnil Images */}
               <div className="flex justify-center items-center">
                 <div
-                  className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl mb-6 p-10`}
+                  className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col md:flex-row shadow-xl mb-6 p-10`}
                 >
-                  {/* Title */}
-                  <h2 className="text-blue-900 font-semibold mb-4">
-                    Insert & Select Image of the Item
-                  </h2>
+                  <div className="flex flex-col w-full">
+                    {/* Title */}
+                    <h2 className="text-blue-900 font-semibold mb-4">
+                      Insert & Select Image of the Item
+                    </h2>
 
-                  {/* Image Gallery */}
-                  <div className="flex flex-row">
-                    {/* Thumbnails */}
-                    <div className="flex flex-col justify-center items-center space-y-2">
-                      {images.map((image, index) => (
+                    {/* Image Gallery */}
+                    <div className="flex">
+                      {/* Thumbnails */}
+                      <div className="flex flex-col space-y-2">
+                        {images.map((image, index) => (
+                          <img
+                            key={index}
+                            src={image.src}
+                            alt={image.alt}
+                            className={`w-16 h-16 rounded-md cursor-pointer border-2 ${
+                              selectedImageIndex === index
+                                ? "border-blue-500"
+                                : "border-transparent"
+                            }`}
+                            onClick={() => handleThumbnailClick(index)}
+                          />
+                        ))}
+                      </div>
+
+                      {/* Main Image */}
+                      <div className="ml-8">
                         <img
-                          key={index}
-                          src={image.src}
-                          alt={image.alt}
-                          className={`w-16 h-16 rounded-md cursor-pointer border-2 ${
-                            selectedImageIndex === index
-                              ? "border-blue-500"
-                              : "border-transparent"
-                          }`}
-                          onClick={() => handleThumbnailClick(index)}
+                          src={images[selectedImageIndex].src}
+                          alt={images[selectedImageIndex].alt}
+                          className="w-96 h-auto rounded-md"
                         />
-                      ))}
+                      </div>
                     </div>
+                  </div>
 
-                    {/* Main Image */}
-                    <div className="ml-8">
-                      <img
-                        src={images[selectedImageIndex].src}
-                        alt={images[selectedImageIndex].alt}
-                        className="w-96 h-auto rounded-md"
-                      />
-                    </div>
+                  {/* QR Code and Barcode */}
+                  <div className="flex flex-col justify-end w-full items-center ml-10 mb-10">
+                    <Barcode value={data?.barcode} format="EAN13" background="transparent" width={1.9} height={65} />
+                    <QRCodeSVG value={data?.barcode} bgColor="transparent" width="170" height="170" className="mt-6" />
                   </div>
                 </div>
               </div>
