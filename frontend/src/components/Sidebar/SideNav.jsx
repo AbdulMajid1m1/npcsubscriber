@@ -969,12 +969,18 @@ function SideNav({ isOpen, toggleSideNav }) {
         >
           <section className="sticky top-0 z-20 px-3 py-0 bg-[#1F0567] shadow text-gray-100 lg:px-5">
             <nav className="relative">
+            <div className="flex justify-between items-center flex-wrap">
               <div className="flex items-center justify-start">
                 <button onClick={toggleSideNav} className="px-2 py-3">
                   <RxHamburgerMenu className="text-white h-auto w-6" />
                 </button>
                 <p className="text-white font-sans">Subscriber</p>
               </div>
+              <div className="flex justify-center items-center gap-3">
+                <p className='text-white font-sans'>Company Name: 5898</p>
+                <img src={Images} className="h-8 w-auto object-contain" alt="" />
+              </div>
+             </div>
             </nav>
           </section>
         </div>
