@@ -15,6 +15,7 @@ import halal from "../../../../Images/digitalLinks/halal.png";
 import { RxCrossCircled } from "react-icons/rx";
 
 import { FaCross } from "react-icons/fa";
+import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
 
 const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
   console.log(data);
@@ -106,7 +107,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       <div className="flex items-center mt-2">
                         <div className="w-24 h-32 flex-shrink-0">
                           <img
-                            src={brandimage}
+                            src={imageLiveUrl(data?.front_image)}
                             alt="Product"
                             className="w-full h-full object-cover rounded-md"
                           />
