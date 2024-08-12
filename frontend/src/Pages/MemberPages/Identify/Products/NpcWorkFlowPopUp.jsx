@@ -103,9 +103,23 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   {/* First Card */}
                   <div className="bg-white relative shadow-lg rounded-lg p-0 w-full border border-[#2C5DDA]">
                     <div className="flex items-center justify-between px-3 py-2">
-                      <h3 className="text-lg font-bold text-[#06C937]">
-                        Complete Data
-                      </h3>
+                      <div>
+                      {!data.barcode ||
+                          !data.Origin ||
+                          !data.countrySale ||
+                          !data.unit ||
+                          !data.gpc ||
+                          !data.front_image ||
+                          !data.BrandName ? (
+                            <h3 className="text-lg font-bold text-[#ff3535]">
+                              In-Complete Data
+                            </h3>
+                          ) : (
+                            <h3 className="text-lg font-bold text-[#06C937]">
+                              Complete Data
+                            </h3>
+                          )}
+                      </div>
                       <div className="w-14 h-14 absolute top-6 right-8 flex items-center justify-center bg-white border-4 border-blue-700 rounded-full">
                         <div className="w-10 h-10 flex items-center justify-center rounded-full">
                           {!data.barcode ||
