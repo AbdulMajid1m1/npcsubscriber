@@ -352,8 +352,8 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
 
                   {/* QR Code and Barcode */}
                   <div className="flex flex-col justify-end w-full items-center ml-10 mb-10">
-                    <Barcode value={data?.barcode} format="EAN13" background="transparent" width={1.9} height={65} />
-                    <QRCodeSVG value={data?.barcode} bgColor="transparent" width="170" height="170" className="mt-6" />
+                    <Barcode value={data?.barcode} format="EAN13" width={2.5} height={75} />
+                    <QRCodeSVG value={data?.barcode} width="190" height="180" className="mt-6" />
                   </div>
                 </div>
               </div>
