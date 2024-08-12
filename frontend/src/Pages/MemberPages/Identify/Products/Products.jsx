@@ -19,6 +19,7 @@ import { ImSpinner6 } from "react-icons/im";
 import { newRequestnpc } from "../../../../utils/userRequest";
 import { toast } from "react-toastify";
 import axios from "axios";
+import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
 
 const Products = () => {
   const [activeTab, setActiveTab] = useState("Standard Search");
@@ -71,7 +72,7 @@ const Products = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://gs1ksa.org:3091/api/products/paginatedProducts?page=${currentPage}&pageSize=${pageSize}`,
+        `http://gs1ksa.org:3091/api/products/paginatedProducts?page=${currentPage}&pageSize=${pageSize}&user_id=3716`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -259,7 +260,7 @@ const Products = () => {
                       <div className="flex flex-col items-center justify-center w-full h-60 transition-transform transform hover:scale-105">
                         <div className="w-32 h-32 mb-2 overflow-hidden rounded-full border border-[#71BAEF] shadow-lg">
                           <img
-                            src={listrequst}
+                            src={imageLiveUrl(request?.front_image)}
                             alt={request.barcode}
                             className="object-cover w-full h-full"
                           />
@@ -312,15 +313,15 @@ const Products = () => {
                   <div 
                   onClick={() => navigate(`/member/product-details`)}>
                   <p className="text-center font-normal font-sans text-white bg-[#100DA6]">
-                    GTIN:{request.gcpGLNID}
+                    GTIN:{request.barcode}
                   </p>
                   <img
-                    src={listrequst}
+                    src={imageLiveUrl(request?.front_image)}
                     alt={request.BrandName}
-                    className="w-36 h-36 mb-4 object-contain self-center"
+                    className="w-full h-36 mb-4 object-contain self-center"
                   />
                   <p className="text-center font-normal font-sans text-white text-sm bg-[#100DA6]">
-                  {request.barcode}
+                  {request.productnameenglish}
                   </p>
                   </div>
                   <div className="flex justify-between mt-2">
