@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import brandimage from "../../../../Images/brandimage.png";
 import check from "../../../../Images/check.png";
 import packaging from "../../../../Images/digitalLinks/packaging.png";
@@ -15,9 +15,27 @@ import halal from "../../../../Images/digitalLinks/halal.png";
 import { RxCrossCircled } from "react-icons/rx";
 
 import { FaCross } from "react-icons/fa";
+import newRequest from "../../../../utils/userRequest";
 
 const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
-  console.log(data);
+  const [dqmsData, setDqmsDData] = useState(null);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (data && data.barcode) {
+        try {
+          const response = await newRequest.get(
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data.barcode}`
+          );
+          console.log(response.data);
+          setDqmsDData(response.data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    fetchData();
+  }, [data]);
   const handleClosePopUp = () => {
     setVisibility(false);
   };
@@ -58,11 +76,23 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                     GTIN
                   </div>
                   <div className="border-t-2 border-blue-600 w-[80%]"></div>
-                  <div className="bg-gray-500 w-auto text-white px-5 py-1 rounded-full">
+                  <div
+                    className={`${
+                      dqmsData?.dqms.is_dqms_compliant
+                        ? "bg-gray-500"
+                        : "bg-blue-600"
+                    } w-auto text-white px-5 py-1 rounded-full`}
+                  >
                     DQMS
                   </div>
                   <div className="border-t-2  border-gray-500 w-[80%]"></div>
-                  <div className="bg-gray-500 w-auto text-white px-5 py-1 rounded-full">
+                  <div
+                    className={`${
+                      dqmsData?.compliance.is_compliance
+                        ? "bg-gray-500"
+                        : "bg-blue-600"
+                    } w-auto text-white px-5 py-1 rounded-full`}
+                  >
                     COMPLIANCE
                   </div>
                 </div>
@@ -239,57 +269,67 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   <div className="bg-[#E9EBEE] shadow-lg rounded-lg p-3 w-full border border-blue-300">
                     <div className="grid grid-cols-3 sm:gap-7 gap-4">
                       {/* Row 1 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={packaging}
-                          alt="Compliance 1"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center font-sans">
-                          Packaging
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={qulaitymark}
-                          alt="Compliance 2"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Quality Mark
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={efficiency}
-                          alt="Compliance 3"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Efficiency
-                        </p>
-                      </div>
+                      {dqmsData?.dqms?.packaging && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={packaging}
+                            alt="Compliance 1"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center font-sans">
+                            Packaging
+                          </p>
+                        </div>
+                      )}
+                      {dqmsData?.dqms.qmark && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={qulaitymark}
+                            alt="Compliance 2"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Quality Mark
+                          </p>
+                        </div>
+                      )}
+                      {dqmsData?.dqms.efficiency && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={efficiency}
+                            alt="Compliance 3"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Efficiency
+                          </p>
+                        </div>
+                      )}
                       {/* Row 2 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={safetyinformation}
-                          alt="Compliance 4"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Safety Information
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={certificate}
-                          alt="Compliance 5"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          IECEE Certificate
-                        </p>
-                      </div>
+                      {dqmsData?.dqms.iecce && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={safetyinformation}
+                            alt="Compliance 4"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Safety Information
+                          </p>
+                        </div>
+                      )}
+                      {dqmsData?.dqms.iecce && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={certificate}
+                            alt="Compliance 5"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            IECEE Certificate
+                          </p>
+                        </div>
+                      )}
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
                           src={cocconformity}
@@ -300,7 +340,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                           Coc Conformity
                         </p>
                       </div>
-                      {/* Row 3 */}
+
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
                           src={productcontents}
@@ -322,29 +362,43 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                         </p>
                       </div>
                     </div>
+
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
-                      <span className="text-lg font-sans font-bold text-blue-800">
-                        NON
-                      </span>
-                      <span className="text-xl font-sans font-bold text-[#06C937]">
-                        Compliant
-                      </span>
-                      <div className="w-10 h-10 flex items-center justify-center bg-red-600 rounded-full">
-                        <svg
-                          className="w-6 h-6 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          ></path>
-                        </svg>
-                      </div>
+                      {!dqmsData?.dqms.is_dqms_compliant ? (
+                        <>
+                          <span className="text-xl font-sans font-bold text-[#06C937]">
+                            {dqmsData?.dqms.dqmsStatus}
+                          </span>
+
+                          <img
+                            src={check}
+                            alt="Check Icon"
+                            className="w-9 h-9"
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl font-sans font-bold text-red-600">
+                            {dqmsData?.dqms.dqmsStatus}
+                          </span>
+                          <div className="w-9 h-9 flex items-center justify-center bg-red-600 rounded-full">
+                            <svg
+                              className="w-6 h-6 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              ></path>
+                            </svg>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                   {/* </div> */}
@@ -353,47 +407,56 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   <div className="bg-[#E9EBEE] shadow-lg rounded-lg p-3 w-full border border-blue-300">
                     <div className="grid grid-cols-3 sm:gap-7 gap-4">
                       {/* Row 1 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={packaging}
-                          alt="Compliance 1"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center font-sans">
-                          Packaging
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={safetyinformation}
-                          alt="Compliance 3"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Safety Information
-                        </p>
-                      </div>
+                      {dqmsData?.compliance.packaging && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={packaging}
+                            alt="Compliance 1"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center font-sans">
+                            Packaging
+                          </p>
+                        </div>
+                      )}
+                      {dqmsData?.compliance.foodProductSafety && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={safetyinformation}
+                            alt="Compliance 3"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Safety Information
+                          </p>
+                        </div>
+                      )}
                       {/* Row 2 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={productcontents}
-                          alt="Compliance 4"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Product Contents
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={storage}
-                          alt="Compliance 5"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Storage
-                        </p>
-                      </div>
+
+                      {dqmsData?.compliance.productContents && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={productcontents}
+                            alt="Compliance 4"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Product Contents
+                          </p>
+                        </div>
+                      )}
+                      {dqmsData?.compliance.productStorage && (
+                        <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
+                          <img
+                            src={storage}
+                            alt="Compliance 5"
+                            className="h-8 w-full object-contain"
+                          />
+                          <p className="text-secondary text-sm text-center">
+                            Storage
+                          </p>
+                        </div>
+                      )}
                       <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
                         <img
                           src={haccp}
@@ -427,28 +490,44 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       </div>
                     </div>
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
-                      <span className="text-lg font-sans font-bold text-blue-800">
+                      {/* <span className="text-lg font-sans font-bold text-blue-800">
                         NON
-                      </span>
-                      <span className="text-xl font-sans font-bold text-[#06C937]">
-                        Compliant
-                      </span>
-                      <div className="w-9 h-9 flex items-center justify-center bg-red-600 rounded-full">
-                        <svg
-                          className="w-6 h-6 text-white"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M6 18L18 6M6 6l12 12"
-                          ></path>
-                        </svg>
-                      </div>
+                      </span> */}
+                      {!dqmsData?.compliance.is_compliance ? (
+                        <>
+                          <span className="text-xl font-sans font-bold text-[#06C937]">
+                            {dqmsData?.compliance.complianceStatus}
+                          </span>
+
+                          <img
+                            src={check}
+                            alt="Check Icon"
+                            className="w-9 h-9"
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl font-sans font-bold text-red-600">
+                            {dqmsData?.compliance.complianceStatus}
+                          </span>
+                          <div className="w-9 h-9 flex items-center justify-center bg-red-600 rounded-full">
+                            <svg
+                              className="w-6 h-6 text-white"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M6 18L18 6M6 6l12 12"
+                              ></path>
+                            </svg>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
                 </div>
