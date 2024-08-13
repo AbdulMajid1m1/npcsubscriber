@@ -3,19 +3,53 @@ import { useTranslation } from "react-i18next";
 import image1 from "../../../../Images/productsdetails/image1.png";
 import image2 from "../../../../Images/productsdetails/image2.png";
 import image3 from "../../../../Images/productsdetails/image3.png";
+import check from "../../../../Images/check.png";
+import packaging from "../../../../Images/digitalLinks/packaging.png";
+import qulaitymark from "../../../../Images/digitalLinks/qulaitymark.png";
+import efficiency from "../../../../Images/digitalLinks/efficiency.png";
+import safetyinformation from "../../../../Images/digitalLinks/safetyinformation.png";
+import certificate from "../../../../Images/digitalLinks/certificate .png";
+import cocconformity from "../../../../Images/digitalLinks/cocconformity.png";
+import productcontents from "../../../../Images/digitalLinks/productcontents.png";
+import storage from "../../../../Images/digitalLinks/storage.png";
+import cert from "../../../../Images/digitalLinks/cert.png";
+import haccp from "../../../../Images/digitalLinks/haccp.png";
+import halal from "../../../../Images/digitalLinks/halal.png";
 import image4 from "../../../../Images/productsdetails/image4.png";
+import effiencyImage from "../../../../Images/efficiency.png";
 import "./ProductDetails.css";
 import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
 import Barcode from "react-barcode";
 import { QRCodeSVG } from "qrcode.react";
+import newRequest from "../../../../utils/userRequest";
 
 const ProductDetails = ({ isVisible, setVisibility, data }) => {
-  // console.log("data",data);
+  console.log("data", data);
   const { t, i18n } = useTranslation();
+
+  const [dqmsData, setDqmsDData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (data && data.barcode) {
+        try {
+          const response = await newRequest.get(
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data?.barcode}`
+          );
+          console.log(response.data);
+          setDqmsDData(response.data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+    };
+
+    fetchData();
+  }, [data]);
 
   // List of images
   const images = [
-    { src: imageLiveUrl(data.front_image) || image1, alt: "Shoe 1"  },
+    { src: imageLiveUrl(data.front_image) || image1, alt: "Shoe 1" },
     { src: imageLiveUrl(data.back_image) || image2, alt: "Shoe 2" },
     { src: imageLiveUrl(data.image_1) || image3, alt: "Shoe 3" },
     { src: imageLiveUrl(data.image_2) || image4, alt: "Shoe 4" },
@@ -75,7 +109,8 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     Complete Data
                   </p>
                   <p className="font-sans text-base">
-                    This number is registered to company: :{" "} {data?.productnameenglish}
+                    This number is registered to company: :{" "}
+                    {data?.productnameenglish}
                   </p>
                 </div>
               </div>
@@ -123,7 +158,7 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                           Brand Name [English / Arabic]{" "}
                         </span>
                         <input
-                        type="text"
+                          type="text"
                           placeholder="Enter Brand Name[English / Arabic]"
                           value={`${data?.BrandName} , ${data?.BrandNameAr}`}
                           disabled
@@ -141,13 +176,13 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                           </label>
                         </div>
                         <div className="flex items-center gap-2 w-full mt-2">
-                         <input 
-                          type="text"
-                          placeholder="Enter GPC"
-                          value={data?.gpc}
-                          disabled
-                          className="p-2 pl-4 border rounded-full w-full bg-white text-secondary placeholder:text-secondary"
-                        /> 
+                          <input
+                            type="text"
+                            placeholder="Enter GPC"
+                            value={data?.gpc}
+                            disabled
+                            className="p-2 pl-4 border rounded-full w-full bg-white text-secondary placeholder:text-secondary"
+                          />
                         </div>
                       </div>
                     </div>
@@ -157,7 +192,7 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Unit Code </span>
                         <input
-                        type="text"
+                          type="text"
                           placeholder="Enter unit code"
                           value={data?.unit}
                           disabled
@@ -180,8 +215,8 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                     <div className="flex flex-col md:flex-row justify-between items-center">
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Origin </span>
-                        <input 
-                        type="text"
+                        <input
+                          type="text"
                           placeholder="Enter origin"
                           value={data?.Origin}
                           disabled
@@ -190,9 +225,9 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
                       </label>
                       <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
                         <span className="ml-1 mb-2"> Country of Sale </span>
-                        <input 
-                        type="text"
-                        placeholder="Enter country of sale"
+                        <input
+                          type="text"
+                          placeholder="Enter country of sale"
                           value={data?.countrySale}
                           disabled
                           className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
@@ -205,107 +240,189 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
 
               {/* Second Content */}
               <div className="flex justify-center items-center">
-                <div
-                  className={`h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl mt-6 mb-6 sm:px-10 px-4 py-8`}
-                >
-                  <form className="flex flex-col gap-4">
-                    {/* Product Description Language */}
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2">
-                          {" "}
-                          Product Description Language{" "}
-                        </span>
-                        <input
-                          type="text"
-                          placeholder="Enter Product Description Language"
-                          value={data?.HsDescription}
-                          disabled
-                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2"> Product Type </span>
-                        <input
-                          type="text"
-                          placeholder="Enter Product Type"
-                          value={data?.ProductType}
-                          disabled
-                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
+                <div className="h-auto w-[97%] bg-[#DDF3F6] rounded-md flex flex-col shadow-xl mt-6 mb-6 sm:px-10 px-4 py-8">
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div>
+                      <form className="flex flex-col gap-6">
+                        {/* Product Description Language and Product Type */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">
+                              Product Description Language
+                            </span>
+                            <input
+                              type="text"
+                              placeholder="Enter Product Description Language"
+                              value={data?.HsDescription}
+                              disabled
+                              className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">Product Type</span>
+                            <input
+                              type="text"
+                              placeholder="Enter Product Type"
+                              value={data?.ProductType}
+                              disabled
+                              className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                        </div>
+
+                        {/* Package Type and Product URL */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">Package Type</span>
+                            <input
+                              type="text"
+                              placeholder="Enter Package Type"
+                              value={data?.PackagingType}
+                              disabled
+                              className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">Product URL</span>
+                            <input
+                              type="url"
+                              placeholder="Enter URL"
+                              value={data?.product_url}
+                              disabled
+                              className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                        </div>
+
+                        {/* HS-Code */}
+                        <div className="flex flex-col">
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">HS-Code</span>
+                            <input
+                              type="text"
+                              placeholder="Enter HS-Code"
+                              value={data?.HSCODES}
+                              disabled
+                              className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                          <label className="flex items-center gap-1 mt-2">
+                            <input type="checkbox" className="form-checkbox" />
+                            <span>Add HS-Code by myself</span>
+                          </label>
+                        </div>
+
+                        {/* Description */}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">
+                              Description [English]
+                            </span>
+                            <input
+                              placeholder="Automatic"
+                              value={data?.details_page}
+                              disabled
+                              className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                          <label className="flex flex-col">
+                            <span className="ml-1 mb-2">
+                              Description [Arabic]
+                            </span>
+                            <input
+                              placeholder="Automatic"
+                              value={data?.details_page_ar}
+                              disabled
+                              className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
+                            />
+                          </label>
+                        </div>
+                      </form>
                     </div>
 
-                    {/* Package Type and Product URL */}
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2"> Package Type </span>
-                        <input
-                        type="text"
-                          placeholder="Enter Package Type"
-                          value={data?.PackagingType}
-                          disabled
-                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2"> Product URL </span>
-                        <input
-                          type="url"
-                          placeholder="Enter URL"
-                          value={data?.product_url}
-                          disabled
-                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
-                    </div>
+                    <div className="grid grid-cols-[1fr_2fr] gap-5">
+                      <div className="grid grid-cols-1 gap-4">
+                        {dqmsData?.compliance.packaging && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={packaging}
+                              alt={`Image1`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
+                        {dqmsData?.dqms.qmark && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={qulaitymark}
+                              alt={`Image 2`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
 
-                    {/* HS-Code */}
-                    <div className="flex flex-col md:flex-row justify-between items-start">
-                      <div className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2">HS-Code</span>
-                        <input
-                        type="text"
-                          placeholder="Enter HS-Code"
-                          value={data?.HSCODES}
-                          disabled
-                          className="p-2 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                        <label className="flex items-center gap-1 mt-2">
-                          <input type="checkbox" className="form-checkbox" />
-                          <span>Add HS-Code by myself</span>
-                        </label>
+                        {dqmsData?.dqms.iecce && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={halal}
+                              alt={`Image 3`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
+                        {dqmsData?.dqms.efficiency && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={efficiency}
+                              alt={`Image 3 `}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
+
+                        {/* <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                          <img
+                            src={cocconformity}
+                            alt={`Imagen 4`}
+                            className="object-contain h-full"
+                          />
+                        </div> */}
+                        {dqmsData?.compliance.foodProductSafety && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={safetyinformation}
+                              alt={`Image 5`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
+                        {dqmsData?.compliance.productStorage && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={storage}
+                              alt={`Image 6`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
+                        {dqmsData?.compliance.productContents && (
+                          <div className="bg-white shadow-lg w-40 h-12 flex justify-center items-center rounded-lg overflow-hidden">
+                            <img
+                              src={productcontents}
+                              alt={`Image 7`}
+                              className="object-contain h-full"
+                            />
+                          </div>
+                        )}
                       </div>
-                    </div>
 
-                    {/* Description */}
-                    <div className="flex flex-col md:flex-row justify-between items-center">
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2">
-                          {" "}
-                          Description [English]{" "}
-                        </span>
-                        <input
-                          placeholder="Automatic"
-                          value={data?.details_page}
-                          disabled
-                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
-                      <label className="flex flex-col w-full md:w-[48%] mb-4 md:mb-0">
-                        <span className="ml-1 mb-2">
-                          {" "}
-                          Description [Arabic]{" "}
-                        </span>
-                        <input
-                          placeholder="Automatic"
-                          value={data?.details_page_ar}
-                          disabled
-                          className="p-2 pl-4 border rounded-full bg-white text-secondary placeholder:text-secondary"
-                        />
-                      </label>
+                      <img
+                        src={effiencyImage}
+                        alt="Efficiency image"
+                        className="object-contain min-h-96 w-full"
+                      />
                     </div>
-                  </form>
+                  </div>
                 </div>
               </div>
 
@@ -352,8 +469,18 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
 
                   {/* QR Code and Barcode */}
                   <div className="flex flex-col justify-end w-full items-center ml-10 mb-10">
-                    <Barcode value={data?.barcode} format="EAN13" width={2.5} height={75} />
-                    <QRCodeSVG value={data?.barcode} width="190" height="180" className="mt-6" />
+                    <Barcode
+                      value={data?.barcode}
+                      format="EAN13"
+                      width={2.5}
+                      height={75}
+                    />
+                    <QRCodeSVG
+                      value={data?.barcode}
+                      width="190"
+                      height="180"
+                      className="mt-6"
+                    />
                   </div>
                 </div>
               </div>

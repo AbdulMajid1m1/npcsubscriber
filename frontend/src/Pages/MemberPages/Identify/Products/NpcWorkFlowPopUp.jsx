@@ -13,9 +13,8 @@ import cert from "../../../../Images/digitalLinks/cert.png";
 import haccp from "../../../../Images/digitalLinks/haccp.png";
 import halal from "../../../../Images/digitalLinks/halal.png";
 import { RxCrossCircled } from "react-icons/rx";
-
-import { FaCross } from "react-icons/fa";
 import imageLiveUrl from "../../../../utils/urlConverter/imageLiveUrl";
+
 import newRequest from "../../../../utils/userRequest";
 
 const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
@@ -25,7 +24,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
       if (data && data.barcode) {
         try {
           const response = await newRequest.get(
-            `/digitalLinks/getComplianceAndDqmsStatus?barcode=6285818000396`
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data?.barcode}`
           );
           console.log(response.data);
           setDqmsDData(response.data);
@@ -104,21 +103,21 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   <div className="bg-white relative shadow-lg rounded-lg p-0 w-full border border-[#2C5DDA]">
                     <div className="flex items-center justify-between px-3 py-2">
                       <div>
-                      {!data.barcode ||
-                          !data.Origin ||
-                          !data.countrySale ||
-                          !data.unit ||
-                          !data.gpc ||
-                          !data.front_image ||
-                          !data.BrandName ? (
-                            <h3 className="text-lg font-bold text-[#ff3535]">
-                              In-Complete Data
-                            </h3>
-                          ) : (
-                            <h3 className="text-lg font-bold text-[#06C937]">
-                              Complete Data
-                            </h3>
-                          )}
+                        {!data.barcode ||
+                        !data.Origin ||
+                        !data.countrySale ||
+                        !data.unit ||
+                        !data.gpc ||
+                        !data.front_image ||
+                        !data.BrandName ? (
+                          <h3 className="text-lg font-bold text-[#ff3535]">
+                            In-Complete Data
+                          </h3>
+                        ) : (
+                          <h3 className="text-lg font-bold text-[#06C937]">
+                            Complete Data
+                          </h3>
+                        )}
                       </div>
                       <div className="w-14 h-14 absolute top-6 right-8 flex items-center justify-center bg-white border-4 border-blue-700 rounded-full">
                         <div className="w-10 h-10 flex items-center justify-center rounded-full">
@@ -151,7 +150,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       <div className="flex items-center mt-2">
                         <div className="w-24 h-32 flex-shrink-0">
                           <img
-                            src={imageLiveUrl(data?.front_image)}
+                            src={brandimage}
                             alt="Product"
                             className="w-full h-full object-cover rounded-md"
                           />
@@ -345,57 +344,15 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                           </p>
                         </div>
                       )}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={cocconformity}
-                          alt="Compliance 6"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Coc Conformity
-                        </p>
-                      </div>
-
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={productcontents}
-                          alt="Compliance 7"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Product Contents
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={storage}
-                          alt="Compliance 8"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Storage
-                        </p>
-                      </div>
                     </div>
 
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
                       {dqmsData?.dqms.is_dqms_compliant ? (
                         <>
-                          <span className="text-xl font-sans font-bold text-[#06C937]">
-                            {dqmsData?.dqms.dqmsStatus}
-                          </span>
-
-                          <img
-                            src={check}
-                            alt="Check Icon"
-                            className="w-9 h-9"
-                          />
-                        </>
-                      ) : (
-                        <>
                           <span className="text-xl font-sans font-bold text-red-600">
                             {dqmsData?.dqms.dqmsStatus}
                           </span>
+
                           <div className="w-9 h-9 flex items-center justify-center bg-red-600 rounded-full">
                             <svg
                               className="w-6 h-6 text-white"
@@ -412,6 +369,17 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                               ></path>
                             </svg>
                           </div>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl font-sans font-bold text-green-600">
+                            {dqmsData?.dqms.dqmsStatus}
+                          </span>
+                          <img
+                            src={check}
+                            alt="Check Icon"
+                            className="w-9 h-9"
+                          />
                         </>
                       )}
                     </div>
@@ -472,55 +440,12 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                           </p>
                         </div>
                       )}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={haccp}
-                          alt="Compliance 6"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          HACCP
-                        </p>
-                      </div>
-                      {/* Row 3 */}
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={halal}
-                          alt="Compliance 7"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          Halal Food
-                        </p>
-                      </div>
-                      <div className="flex flex-col justify-center items-center gap-2 transition-all hover:scale-90 cursor-pointer h-24 w-full bg-white rounded-lg shadow-xl">
-                        <img
-                          src={cert}
-                          alt="Compliance 8"
-                          className="h-8 w-full object-contain"
-                        />
-                        <p className="text-secondary text-sm text-center">
-                          TUV
-                        </p>
-                      </div>
                     </div>
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
                       {/* <span className="text-lg font-sans font-bold text-blue-800">
                         NON
                       </span> */}
                       {dqmsData?.compliance.is_compliance ? (
-                        <>
-                          <span className="text-xl font-sans font-bold text-[#06C937]">
-                            {dqmsData?.compliance.complianceStatus}
-                          </span>
-
-                          <img
-                            src={check}
-                            alt="Check Icon"
-                            className="w-9 h-9"
-                          />
-                        </>
-                      ) : (
                         <>
                           <span className="text-xl font-sans font-bold text-red-600">
                             {dqmsData?.compliance.complianceStatus}
@@ -541,6 +466,17 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                               ></path>
                             </svg>
                           </div>
+                        </>
+                      ) : (
+                        <>
+                          <span className="text-xl font-sans font-bold text-green-600">
+                            {dqmsData?.compliance.complianceStatus}
+                          </span>
+                          <img
+                            src={check}
+                            alt="Check Icon"
+                            className="w-9 h-9"
+                          />
                         </>
                       )}
                     </div>
