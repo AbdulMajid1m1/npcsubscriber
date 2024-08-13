@@ -977,7 +977,7 @@ function SideNav({ isOpen, toggleSideNav }) {
                 <p className="text-white font-sans">Subscriber</p>
               </div>
               <div className="flex justify-center items-center gap-3">
-                <p className='text-white font-sans'>Company Name: 5898</p>
+                <p className='text-white font-sans'>Company Name: UNIONAIRE</p>
                 <img src={Images} className="h-8 w-auto object-contain" alt="" />
               </div>
              </div>
