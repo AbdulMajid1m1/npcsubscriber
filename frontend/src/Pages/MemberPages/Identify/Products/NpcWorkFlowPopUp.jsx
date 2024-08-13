@@ -24,7 +24,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
       if (data && data.barcode) {
         try {
           const response = await newRequest.get(
-            `/digitalLinks/getComplianceAndDqmsStatus?barcode=6285818000396`
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data?.barcode}`
           );
           console.log(response.data);
           setDqmsDData(response.data);
@@ -85,7 +85,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   >
                     DQMS
                   </div>
-                  
+
                   <div className="border-t-2  border-blue-600 w-[80%]"></div>
                   <div
                     className={`${

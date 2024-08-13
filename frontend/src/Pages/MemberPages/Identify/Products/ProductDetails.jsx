@@ -24,7 +24,7 @@ import { QRCodeSVG } from "qrcode.react";
 import newRequest from "../../../../utils/userRequest";
 
 const ProductDetails = ({ isVisible, setVisibility, data }) => {
-  // console.log("data",data);
+  console.log("data", data);
   const { t, i18n } = useTranslation();
 
   const [dqmsData, setDqmsDData] = useState(null);
@@ -34,7 +34,7 @@ const ProductDetails = ({ isVisible, setVisibility, data }) => {
       if (data && data.barcode) {
         try {
           const response = await newRequest.get(
-            `/digitalLinks/getComplianceAndDqmsStatus?barcode=6285818000396`
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data?.barcode}`
           );
           console.log(response.data);
           setDqmsDData(response.data);
