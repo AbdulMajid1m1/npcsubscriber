@@ -13,8 +13,6 @@ import cert from "../../../../Images/digitalLinks/cert.png";
 import haccp from "../../../../Images/digitalLinks/haccp.png";
 import halal from "../../../../Images/digitalLinks/halal.png";
 import { RxCrossCircled } from "react-icons/rx";
-
-import { FaCross } from "react-icons/fa";
 import newRequest from "../../../../utils/userRequest";
 
 const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
@@ -24,7 +22,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
       if (data && data.barcode) {
         try {
           const response = await newRequest.get(
-            `/digitalLinks/getComplianceAndDqmsStatus?barcode=${data.barcode}`
+            `/digitalLinks/getComplianceAndDqmsStatus?barcode=6285818000396`
           );
           console.log(response.data);
           setDqmsDData(response.data);
@@ -78,17 +76,17 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   <div className="border-t-2 border-blue-600 w-[80%]"></div>
                   <div
                     className={`${
-                      dqmsData?.dqms.is_dqms_compliant
+                      !dqmsData?.dqms.is_dqms_compliant
                         ? "bg-gray-500"
                         : "bg-blue-600"
                     } w-auto text-white px-5 py-1 rounded-full`}
                   >
                     DQMS
                   </div>
-                  <div className="border-t-2  border-gray-500 w-[80%]"></div>
+                  <div className="border-t-2  border-blue-600 w-[80%]"></div>
                   <div
                     className={`${
-                      dqmsData?.compliance.is_compliance
+                      !dqmsData?.compliance.is_compliance
                         ? "bg-gray-500"
                         : "bg-blue-600"
                     } w-auto text-white px-5 py-1 rounded-full`}
@@ -364,7 +362,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
-                      {!dqmsData?.dqms.is_dqms_compliant ? (
+                      {dqmsData?.dqms.is_dqms_compliant ? (
                         <>
                           <span className="text-xl font-sans font-bold text-[#06C937]">
                             {dqmsData?.dqms.dqmsStatus}
@@ -493,7 +491,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       {/* <span className="text-lg font-sans font-bold text-blue-800">
                         NON
                       </span> */}
-                      {!dqmsData?.compliance.is_compliance ? (
+                      {dqmsData?.compliance.is_compliance ? (
                         <>
                           <span className="text-xl font-sans font-bold text-[#06C937]">
                             {dqmsData?.compliance.complianceStatus}
