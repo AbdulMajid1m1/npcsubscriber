@@ -151,7 +151,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       <div className="flex items-center mt-2">
                         <div className="w-24 h-32 flex-shrink-0">
                           <img
-                            src={brandimage}
+                            src={imageLiveUrl(data?.front_image)}
                             alt="Product"
                             className="w-full h-full object-cover rounded-md"
                           />
