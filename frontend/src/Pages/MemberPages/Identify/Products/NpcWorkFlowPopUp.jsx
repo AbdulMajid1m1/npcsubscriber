@@ -85,6 +85,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                   >
                     DQMS
                   </div>
+
                   <div className="border-t-2  border-blue-600 w-[80%]"></div>
                   <div
                     className={`${
@@ -347,7 +348,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                     </div>
 
                     <div className="mt-3 flex items-center justify-between px-3 py-3">
-                      {dqmsData?.dqms.is_dqms_compliant ? (
+                      {!dqmsData?.dqms.is_dqms_compliant ? (
                         <>
                           <span className="text-xl font-sans font-bold text-red-600">
                             {dqmsData?.dqms.dqmsStatus}
@@ -445,7 +446,7 @@ const NpcWorkFlowPopUp = ({ isVisible, setVisibility, data }) => {
                       {/* <span className="text-lg font-sans font-bold text-blue-800">
                         NON
                       </span> */}
-                      {dqmsData?.compliance.is_compliance ? (
+                      {!dqmsData?.compliance.is_compliance ? (
                         <>
                           <span className="text-xl font-sans font-bold text-red-600">
                             {dqmsData?.compliance.complianceStatus}
