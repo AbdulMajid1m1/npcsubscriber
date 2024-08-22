@@ -1,4 +1,3 @@
-// brand ownser piplines
 pipeline {
     agent any
 
