@@ -1,8 +1,10 @@
-export const baseUrl = "http://gs1ksa.org:3083/api";
+// urls
+// export const baseUrl = "https://.npcksa.org/api";
+export const baseUrl = "https://.npcksa.org/api";
 
-export const baseUrlnpc = "http://gs1ksa.org:3083/api";
+export const baseUrlnpc = "https://.npcksa.org/api";
 
-export const backendUrl = "http://gs1ksa.org:3091";
+export const backendUrl = "https://gs1ksa.org";
 
 export const gtrackUrl = "http://gs1ksa.org:7000/api";
 // export const gtrackUrl = 'http://localhost:7000/api';
