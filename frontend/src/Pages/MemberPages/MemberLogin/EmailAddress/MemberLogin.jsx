@@ -30,7 +30,7 @@ const MemberLogin = () => {
       toast.success(response?.data?.message || "Login Successful");
     } catch (error) {
       console.log(error);
-      toast.error(error?.response?.data?.message || "Login Failed");
+      toast.error(error?.response?.data?.error || "Login Failed");
       setLoading(false);
     }
   };

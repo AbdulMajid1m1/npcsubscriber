@@ -587,6 +587,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import Images from "../../Images/gs1logowhite.png";
+import npclogo2 from "../../Images/npclogo2.png";
 import { useNavigate } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import validation from "../../Images/sidebar/validation.png";
@@ -635,7 +636,7 @@ function SideNav({ isOpen, toggleSideNav }) {
               <div className="flex justify-center items-center w-full px-4 pt-3 pb-3 border-b border-gray-300">
                 <Link to="/member/dashboard">
                   <img
-                    src={Images}
+                    src={npclogo2}
                     alt="logo"
                     className="object-contain h-24"
                   />
@@ -978,7 +979,7 @@ function SideNav({ isOpen, toggleSideNav }) {
               </div>
               <div className="flex justify-center items-center gap-3">
                 <p className='text-white font-sans'>Company Name: UNIONAIRE</p>
-                <img src={Images} className="h-8 w-auto object-contain" alt="" />
+                <img src={npclogo2} className="h-8 w-auto object-contain" alt="" />
               </div>
              </div>
             </nav>
