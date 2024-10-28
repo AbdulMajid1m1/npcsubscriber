@@ -19,8 +19,8 @@ const Header = () => {
           className={`flex items-center flex-wrap mb-4 sm:mb-0 ${i18n.language === 'ar' ? 'lg:flex-row-reverse' : 'lg:flex-row'}`}>
             <img onClick={() => navigate('/')} src={npclogo2} className='h-14 sm:h-16 w-auto cursor-pointer' alt='' />
             <div className='text-center px-2 font-sans'>
-              <p className='text-secondary font-semibold'>{t('GS1 Saudia Arabia')}</p>
-              <p className='text-secondary'>{t('The Global Language of Business')}</p>
+              <p className='text-secondary font-semibold'>{t('National Product Catalogue')}</p>
+              <p className='text-secondary'>{t('Your One Source of Reliable Data')}</p>
             </div>
           </div>
 
