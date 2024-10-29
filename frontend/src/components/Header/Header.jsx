@@ -1,9 +1,9 @@
 import React from 'react'
 import npclogo2 from "../../Images/npclogo2.png"
 import { useNavigate } from 'react-router-dom'
-import { useTranslation } from 'react-i18next';
-// import LanguageSwitcher from "../../switer"
+import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '../../i18n';
+import LanguageSwitcher from '../../switer';
 
 const Header = () => {
   const { t } = useTranslation();
@@ -21,6 +21,12 @@ const Header = () => {
             <div className='text-center px-2 font-sans'>
               <p className='text-secondary font-semibold'>{t('National Product Catalogue')}</p>
               <p className='text-secondary'>{t('Your One Source of Reliable Data')}</p>
+            </div>
+
+            <div className='w-full sm:w-auto '>
+              <I18nextProvider i18n={i18n}>
+                <LanguageSwitcher />
+              </I18nextProvider>
             </div>
           </div>
 

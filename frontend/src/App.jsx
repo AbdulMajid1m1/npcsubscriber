@@ -50,9 +50,9 @@ const App = () => {
   const UserLayout = () => {
     return (
       <div>
-        <div>
+        {/* <div>
           <HeaderLine />
-        </div>
+        </div> */}
         <div className="sticky top-0 z-50 bg-white">
           <Header />
         </div>
