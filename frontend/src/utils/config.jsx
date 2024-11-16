@@ -1,8 +1,8 @@
 // urls
-// export const baseUrl = "https://npcksa.org/api";
-export const baseUrl = "https://npcksa.org/api";
+// export const baseUrl = "https://upchub.online/api";
+export const baseUrl = "https://upchub.online/api";
 
-export const baseUrlnpc = "https://npcksa.org/api";
+export const baseUrlnpc = "https://upchub.online/api";
 
 export const backendUrl = "https://gs1ksa.org";
 

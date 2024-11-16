@@ -40,7 +40,7 @@ const Products = () => {
     setIsLoading(true);
     try {
       const response = await axios.get(
-        `http://gs1ksa.org:3091/api/products?user_id=3716`,
+        `https://gs1ksa.org/api/products?user_id=3716`,
         {
           headers: {
             Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhZG1pbklkIjoiY2x0aXowN2tlMDAwMTEza24xOHIwcHE3NyIsImVtYWlsIjoiYWJkdWxtYWppZDFtMkBnbWFpbC5jb20iLCJpc19zdXBlcl9hZG1pbiI6MSwidXNlcm5hbWUiOiJBYmR1bCBNYWppZCIsInBlcm1pc3Npb25zIjpbIm1lbWJlcnMiLCJicmFuZHMiLCJndGluX2JhcmNvZGUiLCJnbG5fbG9jYXRpb24iLCJzc2NjIiwiZm9yZWlnbl9ndGluIiwicGF5bWVudF9zbGlwc19mb3JlaWduX2d0aW4iLCJvbGRfaW5hY3RpdmVfbWVtYmVycyIsImhlbHBfZGVzayIsInN0YWZmX2hlbHBfZGVzayIsInByb2R1Y3RfcGFja2FnaW5nIiwib3RoZXJfcHJvZHVjdHMiLCJjcl9udW1iZXIiXSwicm9sZXMiOlsiTWFya2V0aW5nIFN0YWZmIl0sImlhdCI6MTcyMzI3MTQ3OSwiZXhwIjoxNzMxMDQ3NDc5fQ.T0Fjd3ca4EFuzGwtpgTRhSieWgcDTBHzTsTwdC16-3A`,
@@ -73,7 +73,7 @@ const Products = () => {
     setLoading(true);
     try {
       const response = await fetch(
-        `http://gs1ksa.org:3091/api/products/paginatedProducts?page=${currentPage}&pageSize=${pageSize}&user_id=3716`,
+        `https://gs1ksa.org/api/products/paginatedProducts?page=${currentPage}&pageSize=${pageSize}&user_id=3716`,
         {
           headers: {
             "Content-Type": "application/json",
