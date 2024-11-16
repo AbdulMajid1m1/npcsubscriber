@@ -90,7 +90,7 @@ const NewFooter = () => {
 
 
         <div className={`flex flex-col justify-center items-center sm:mt-20 mt-6 sm:flex-row sm:justify-between sm:items-center `}>
-          <h2 className='text-white font-normal font-sans sm:font-semibold mb-2 sm:mb-0'> {t('Copyright @GS1 Saudi Arabia - 2024 All rights reserved.')}</h2>
+          {/* <h2 className='text-white font-normal font-sans sm:font-semibold mb-2 sm:mb-0'> {t('Copyright @GS1 Saudi Arabia - 2024 All rights reserved.')}</h2> */}
           <div className='hidden flex-wrap gap-4'>
             {/* <a href="https://api.whatsapp.com/send?text=YourShareTextHere&phone=+966112182428" target="_blank" rel="noopener noreferrer">
               <img
