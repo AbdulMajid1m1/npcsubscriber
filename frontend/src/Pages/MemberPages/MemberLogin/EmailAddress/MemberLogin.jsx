@@ -44,7 +44,7 @@ const MemberLogin = () => {
               Welcome to the
             </h2>
             <h2 className="text-secondary text-center font-bold font-body sm:text-2xl text-lg mt-3">
-              National Product Catalouge Subscriber
+              Universal Product Catalouge Subscriber
             </h2>
           </div>
           <div className="mt-2 px-2">

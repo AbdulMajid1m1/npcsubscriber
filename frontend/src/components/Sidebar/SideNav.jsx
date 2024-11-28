@@ -604,6 +604,7 @@ import approvedrequest from "../../Images/sidebar/approvedrequest.png";
 import products from "../../Images/sidebar/products.png";
 import submittedrequest from "../../Images/sidebar/submittedrequest.png";
 import logout from "../../Images/sidebar/logout.png";
+import datahublogotransparent from "../../Images/datahublogotransparent.png";
 import ApiGuideicon from "../../Images/sidebar/MyNPCservices.png"
 
 function SideNav({ isOpen, toggleSideNav }) {
@@ -636,7 +637,7 @@ function SideNav({ isOpen, toggleSideNav }) {
               <div className="flex justify-center items-center w-full px-4 pt-3 pb-3 border-b border-gray-300">
                 <Link to="/member/dashboard">
                   <img
-                    src={npclogo2}
+                    src={datahublogotransparent}
                     alt="logo"
                     className="object-contain h-24"
                   />
@@ -979,7 +980,7 @@ function SideNav({ isOpen, toggleSideNav }) {
               </div>
               <div className="flex justify-center items-center gap-3">
                 <p className='text-white font-sans'>Company Name: UNIONAIRE</p>
-                <img src={npclogo2} className="h-8 w-auto object-contain" alt="" />
+                <img src={datahublogotransparent} className="h-8 w-auto object-contain" alt="" />
               </div>
              </div>
             </nav>
